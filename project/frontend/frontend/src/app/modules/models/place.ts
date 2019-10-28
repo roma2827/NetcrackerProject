@@ -6,4 +6,5 @@ export class Place {
   row: number;
   isFree: string;
   hall: Hall;
+  
 }

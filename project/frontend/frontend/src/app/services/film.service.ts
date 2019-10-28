@@ -30,5 +30,4 @@ export class FilmService { //todo create interface
   getFilmByName(name: string): Observable<Film> {
     return this.http.get<Film>('/api/films/' + name);
   }
-
 }

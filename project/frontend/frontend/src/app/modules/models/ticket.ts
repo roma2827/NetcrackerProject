@@ -5,4 +5,5 @@ export class Ticket {
   idTicket: number;
   session: Session;
   place: Place;
+  
 }

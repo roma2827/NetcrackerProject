@@ -30,5 +30,4 @@ export class CinemaService { //todo create interface
   getCinemaByName(name: string): Observable<Cinema> {
     return this.http.get<Cinema>('/api/cinema/' + name);
   }
-
 }

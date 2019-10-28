@@ -23,5 +23,5 @@ export class PlaceService { //todo create interface
   deletePlace(idPlace: number): Observable<void> {
     return this.http.delete<void>('/api/place/' + idPlace);
   }
-
+  
 }

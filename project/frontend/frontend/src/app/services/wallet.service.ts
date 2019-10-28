@@ -24,5 +24,5 @@ export class WalletService { //todo create interface
   // deleteWallet(idWallet: number): Observable<void> {
   //   return this.http.delete<void>('/api/wallet/' + idWallet);
   // }
-
+  
 }

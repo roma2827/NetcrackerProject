@@ -7,4 +7,5 @@ export class Session {
   time: number;
   film: Film;
   hall: Hall;
+  
 }

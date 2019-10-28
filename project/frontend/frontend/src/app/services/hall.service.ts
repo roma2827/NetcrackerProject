@@ -31,5 +31,5 @@ export class HallService { //todo create interface
   getHallByName(name: string): Observable<Hall> {
     return this.http.get<Hall>('/api/hall/' + name);
   }
-
+  
 }

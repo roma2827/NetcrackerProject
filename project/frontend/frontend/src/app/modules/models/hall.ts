@@ -6,4 +6,5 @@ export class Hall {
   nSeat: number;
   nRow: number;
   cinema: Cinema;
+  
 }

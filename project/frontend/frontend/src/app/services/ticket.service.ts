@@ -23,5 +23,5 @@ export class TicketService { //todo create interface
   deleteTicket(idTicket: number): Observable<void> {
     return this.http.delete<void>('/api/ticket/' + idTicket);
   }
-
+  
 }

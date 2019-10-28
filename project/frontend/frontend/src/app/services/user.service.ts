@@ -27,5 +27,5 @@ export class UserService { //todo create interface
   getUserByLogin(login: string): Observable<User> {
     return this.http.get<User>('/api/user/' + login);
   }
-
+  
 }
