@@ -1,0 +1,117 @@
+<div class="container-fluid" style="background-image: url('https://static.360tv.ru/media/images/articles/crops/d29d43a8-587d-4b34-b17a-a758d63033fe/crop_921_518.jpg')">
+  <h1 class="text-center" style="color: goldenrod">{{film.name}}</h1>
+  <div class="h4" style="color: goldenrod" >
+    <span>Description </span>
+    <div>{{film.description}}</div>
+    <div><span>Movie Duration </span><span class="text-left">{{film.time}}</span></div>
+    <div><span>Delivery Start Date </span>{{film.startData}}</div>
+    <div><span>Delivery End Date </span>{{film.endData}}</div>
+    <button type="button" class="btn btn-danger" (click)="_deleteFilm(film.filmId)" routerLink="/films">Delete Film</button>
+    </div>
+</div>
+
+<div class="container-fluid">
+  <h1 class="text-center" style="color: goldenrod">Sessions</h1>
+  <div class="row">
+    <div class="" *ngFor="let session of sessions" >
+      <div *ngIf = "film.filmId == session.film.filmId">
+      <button type="button" class="btn btn-info"   
+      >
+        <div><span>Date: </span>{{session.date}}</div>
+        <div><span>Time: </span>{{session.time}}</div>
+        <div><span>hall: </span>{{session.hall.name}}</div>
+        <div><span>cinema: </span>{{session.hall.cinema.name}}</div>
+        <div><span>address: </span>{{session.hall.cinema.address}}</div>
+        <button type="button" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+(click)="_openModal(template)">
+  Add Session
+</button>  -->
+
+<!-- <ul style="background-color: gray" class="sessions">
+  <div *ngFor="let session of sessions">
+    <a *ngIf = "film.filmId == session.film.filmId"
+      routerLink="/films">
+        <div><span>Date: </span>{{session.date}}</div>
+        <div><span>Time: </span>{{session.time}}</div>
+        <div><span>hall: </span>{{session.hall.name}}</div>
+        <div><span>cinema: </span>{{session.hall.cinema.name}}</div>
+        <div><span>address: </span>{{session.hall.cinema.address}}</div>
+    </a>
+  </div>
+</ul> -->
+
+<!-- <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{editMode ? "Edit": "Create"}}  Add Session</h4>
+      <button type="button" class="close pull-right"
+              aria-label="Close" (click)="_closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>date</label>
+        <input class="form-control" name="date" [(ngModel)]="editableBa.date" #date="ngModel" required/>
+        <div [hidden]="date.valid || date.untouched" class="alert alert-danger">
+          Pls set date
+        </div>
+      </div>
+      <div class="form-group">
+        <label>time</label>
+        <input class="form-control" name="time" [(ngModel)]="editableBa.time" #time="ngModel" required/>
+        <div [hidden]="time.valid || time.untouched" class="alert alert-danger">
+          Pls set time
+        </div>
+      </div>
+      <div class="form-group">
+          <label>Film name</label>
+          <input class="form-control" name="film.name" [(ngModel)]="editableBa.film.name" #name="ngModel" required/>
+          <div [hidden]="film.name.valid || film.name.untouched" class="alert alert-danger">
+            Pls set name
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Film description</label>
+          <input class="form-control" name="film.description" [(ngModel)]="editableBa.film.description" #description="ngModel" required/>
+          <div [hidden]="film.description.valid || film.description.untouched" class="alert alert-danger">
+            Pls set description
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Film time</label>
+          <input class="form-control" name="film.time" [(ngModel)]="editableBa.film.time" #time="ngModel" required/>
+          <div [hidden]="film.time.valid || film.time.untouched" class="alert alert-danger">
+            Pls set time
+          </div>
+        </div>
+      <div class="form-group">
+        <label>Film start date</label>
+        <input class="form-control" name="film.startData" [(ngModel)]="editableBa.film.startData" #startData="ngModel" required/>
+        <div [hidden]="film.startData.valid || film.startData.untouched" class="alert alert-danger">
+          Pls set start date
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Film End Date</label>
+        <input class="form-control" name="film.endData" [(ngModel)]="editableBa.film.endData" #endData="ngModel" required/>
+        <div [hidden]="film.endData.valid || film.endData.untouched" class="alert alert-danger">
+          Pls set end date
+        </div>
+      </div>
+  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="_addSession(date, time, film.name, film.description, film.time, film.startData, film.endData)"
+              [disabled]="time.invalid || date.invalid || film.name.invalid || film.description.invalid || film.time.invalid || film.startData.invalid || film.endData.invalid">{{editMode ? "Save": "Create"}}
+      </button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeModal()">Close</button>
+  
+    </div>
+  </ng-template> -->

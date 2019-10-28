@@ -1,0 +1,62 @@
+<nav class="navbar navdar-default" style="background-color: rgb(68, 63, 63)">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <a class="navbar-brand" style="color: goldenrod" routerLink="">Gold Srceen</a>
+    </div>
+    <div>
+      <ul class="navbar-nav">
+        <li class="active">
+          <a class="navbar-brand" style="color: goldenrod" routerLink="">Home</a>
+          <a class="navbar-brand" style="color: goldenrod" routerLink="/films">All Films</a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+          (click)="_openModal(template)">
+            Sign in
+          </button> 
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">{{editMode ? "Edit": "Create"}}  new Billing Account</h4>
+      <button type="button" class="close pull-right"
+              aria-label="Close" (click)="_closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>name</label>
+        <input class="form-control" name="name" [(ngModel)]="editableBa.name" #name="ngModel" required/>
+        <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+          Pls set name Easy way to create client validation
+        </div>
+      </div>
+      <div class="form-group">
+        <label>description</label>
+        <input class="form-control" name="description" [(ngModel)]="editableBa.description" #description="ngModel"
+               required pattern="[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,4}"/>
+        <div [hidden]="description.valid || description.untouched" class="alert alert-danger">
+          E-mail is incorrect
+        </div>
+      </div>
+      <div class="form-group">
+        <label>time</label>
+        <input class="form-control" name="time" [(ngModel)]="editableBa.time" #time="ngModel" required/>
+        <div [hidden]="time.valid || time.untouched" class="alert alert-danger">
+          Pls set time
+        </div>
+      </div>
+  
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="_addFilm(name, description, time)"
+              [disabled]="name.invalid || description.invalid || time.invalid">{{editMode ? "Save": "Create"}}
+      </button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeModal()">Close</button>
+  
+    </div>
+  </ng-template> -->

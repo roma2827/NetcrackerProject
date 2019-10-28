@@ -1,0 +1,25 @@
+<div class="container-fluid" style="background-color: gray">
+  <h1 class="text-center" style="color: goldenrod">Top Films</h1>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-4" style="background-image: url('https://upload.wikimedia.org/wikipedia/ru/6/6f/%D0%94%D0%B6%D0%BE%D0%BA%D0%B5%D1%80_%28%D1%84%D0%B8%D0%BB%D1%8C%D0%BC_%D0%A2%D0%BE%D0%B4%D0%B4%D0%B0_%D0%A4%D0%B8%D0%BB%D0%BB%D0%B8%D0%BF%D1%81%D0%B0%29.jpg')">
+      <a class="navbar-brand" style="color: goldenrod" *ngFor="let film of films" routerLink="/detail/{{film.filmId}}">
+        <h3 *ngIf="film.filmId == 1">
+        {{film.name}}</h3>
+      </a>
+    </div>
+
+    <div class="col-sm-4">
+      <a *ngFor="let film of films" routerLink="/detail/{{film.filmId}}">
+        <h3 *ngIf="film.filmId == 3">{{film.name}}</h3>
+      </a>
+    </div>
+
+    <div class="col-sm-4">
+        <a *ngFor="let film of films" routerLink="/detail/{{film.filmId}}">
+          <h3 *ngIf="film.filmId == 5">{{film.name}}</h3>
+        </a>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<h2>All Film</h2>
+<ul class="films">
+  <li *ngFor="let film of films">
+    <a routerLink="/detail/{{film.filmId}}">
+      <span class="badge">{{film.filmId}}</span> {{film.name}}
+    </a>
+  </li>
+</ul>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+(click)="_openModal(template)">
+  Add Film
+</button> 
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{editMode ? "Edit": "Create"}}  Add Film</h4>
+    <button type="button" class="close pull-right"
+            aria-label="Close" (click)="_closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>name</label>
+      <input class="form-control" name="name" [(ngModel)]="editableBa.name" #name="ngModel" required/>
+      <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+        Pls set name
+      </div>
+    </div>
+    <div class="form-group">
+      <label>description</label>
+      <input class="form-control" name="description" [(ngModel)]="editableBa.description" #description="ngModel" required/>
+      <div [hidden]="description.valid || description.untouched" class="alert alert-danger">
+        Pls set description
+      </div>
+    </div>
+    <div class="form-group">
+      <label>time</label>
+      <input class="form-control" name="time" [(ngModel)]="editableBa.time" #time="ngModel" required/>
+      <div [hidden]="time.valid || time.untouched" class="alert alert-danger">
+        Pls set time
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Start Date</label>
+      <input class="form-control" name="startData" [(ngModel)]="editableBa.startData" #startData="ngModel" required/>
+      <div [hidden]="startData.valid || startData.untouched" class="alert alert-danger">
+        Pls set start date
+      </div>
+    </div>
+    <div class="form-group">
+      <label>End Date</label>
+      <input class="form-control" name="endData" [(ngModel)]="editableBa.endData" #endData="ngModel" required/>
+      <div [hidden]="endData.valid || endData.untouched" class="alert alert-danger">
+        Pls set end date
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="_addFilm(name, description, time, startData, endData)"
+            [disabled]="name.invalid || description.invalid || time.invalid || startData.invalid || endData.invalid">{{editMode ? "Save": "Create"}}
+    </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeModal()">Close</button>
+
+  </div>
+</ng-template>
