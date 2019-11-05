@@ -1,5 +1,7 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,11 +32,13 @@ public class Hall {
     @JoinColumn(name = "id_cinema")
     private Cinema cinema;
 
-    /*@OneToMany(fetch = FetchType.EAGER, mappedBy = "hall")
-    private Set<Session> halls;
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hall")
+//    @JsonManagedReference
+//    private Set<Session> halls;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hall")
-    private Set<Place> hallsPlace;*/
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hall")
+//    @JsonManagedReference
+//    private Set<Place> hallsPlace;
 
     public Hall() {
     }
@@ -44,23 +48,24 @@ public class Hall {
         this.nSeat = nSeat;
         this.nRow = nRow;
         this.cinema = cinema;
+//        this.hallsPlace = hallsPlace;
     }
 
-    /*public Set<Place> getHallsPlace() {
-        return hallsPlace;
-    }
+//    public Set<Place> getHallsPlace() {
+//        return hallsPlace;
+//    }
+//
+//    public void setHallsPlace(Set<Place> hallsPlace) {
+//        this.hallsPlace = hallsPlace;
+//    }
 
-    public void setHallsPlace(Set<Place> hallsPlace) {
-        this.hallsPlace = hallsPlace;
-    }
-
-    public Set<Session> getHalls() {
-        return halls;
-    }
-
-    public void setHalls(Set<Session> halls) {
-        this.halls = halls;
-    }*/
+//    public Set<Session> getHalls() {
+//        return halls;
+//    }
+//
+//    public void setHalls(Set<Session> halls) {
+//        this.halls = halls;
+//    }
 
     public Cinema getCinema() {
         return cinema;

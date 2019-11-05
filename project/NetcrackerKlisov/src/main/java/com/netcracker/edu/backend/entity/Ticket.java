@@ -11,9 +11,9 @@ public class Ticket {
     @Column(name = "id_ticket")
     private Integer idTicket;
 
-    @Column
-    @NotNull
-    private Double price;
+//    @Column
+//    @NotNull
+//    private Double price;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_session")
@@ -26,8 +26,7 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(@NotNull Double price, Session session, Place place) {
-        this.price = price;
+    public Ticket(Session session, Place place) {
         this.session = session;
         this.place = place;
     }
@@ -40,13 +39,13 @@ public class Ticket {
         this.idTicket = idTicket;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
+//    public Double getPrice() {
+//        return price;
+//    }
+//
+//    public void setPrice(Double price) {
+//        this.price = price;
+//    }
 
     public Session getSession() {
         return session;

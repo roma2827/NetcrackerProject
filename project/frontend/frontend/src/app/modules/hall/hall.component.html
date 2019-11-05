@@ -1,0 +1,65 @@
+<!--<div class="container-fluid">-->
+<!--  <h1 class="text-center" style="color: goldenrod">Hall</h1>-->
+<!--  <div class="row">-->
+<!--    <div class="">-->
+<!--      <div><span>Id: </span>{{hall.idHall}}</div>-->
+<!--      <div><span>Name: </span>{{hall.name}}</div>-->
+<!--      <div><span>Row: </span>{{hall.nRow}}</div>-->
+<!--      <div><span>Seat: </span>{{hall.nSeat}}</div>-->
+<!--      <div><span>address: </span>{{hall.cinema.address}}</div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<div class="container">
+  <h1 class="text-center" style="color: goldenrod">Please pick place</h1>
+  <hr align="center" width="90%" size="50" color="black"/>
+  <h4 class="text-center" style="color: goldenrod">screen</h4>
+  <div class="row"><h5>1</h5>
+    <div class="" *ngFor="let place of places">
+      <div class="col-sm-4">
+        <button type="button" *ngIf="place.isFree == 'true'" class="btn btn-success" (click)="getPlaceById(place.idPlace)" (click)="_openTicketModal(Ticket)">
+          <div>{{place.seat}}</div>
+         </button>
+        <button type="button" *ngIf="place.isFree == 'false'" class="btn btn-danger">
+          <div>{{place.seat}}</div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Ticket-->
+<ng-template #Ticket>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Your Ticket</h4>
+    <button type="button" class="close pull-right"
+            aria-label="Close" (click)="_closeTicketModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <h5>Session time {{session.time}}</h5>
+    </div>
+    <div class="form-group">
+      <h5>Session date {{session.date}}</h5>
+    </div>
+    <div class="form-group">
+      <h5>Address {{hall.cinema.address}}</h5>
+    </div>
+    <div class="form-group">
+      <h5>Your place seat {{place.seat}} row {{place.row}}</h5>
+    </div>
+    <div class="form-group">
+      <h5>Price {{place.price}} p</h5>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="updateIsFree(place.idPlace)" (click)="_addTicket(place.idPlace, session.idSession)">{{editTicketMode ? "Save": "Buy"}}
+<!--            [disabled]="place.invalid || session.invalid">{{editTicketMode ? "Save": "Create"}}-->
+    </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeTicketModal()">Close</button>
+  </div>
+</ng-template>

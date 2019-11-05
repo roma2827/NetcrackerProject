@@ -2,17 +2,18 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Film} from "../modules/film/models/film";
+import {Session} from "../modules/models/session";
 
 @Injectable()
 // Data service
-export class FilmService { //todo create interface
+export class FilmService {
 
   constructor(private http: HttpClient) {
   }
 
   // Ajax request for billing account data
   getFilms(): Observable<Film[]> {
-    return this.http.get<Film[]>('/api/films')
+    return this.http.get<Film[]>('/api/films');
   }
 
   getFilmById(filmId: number): Observable<Film>{
@@ -29,5 +30,9 @@ export class FilmService { //todo create interface
 
   getFilmByName(name: string): Observable<Film> {
     return this.http.get<Film>('/api/films/' + name);
+  }
+
+  getSessionByFilmId(filmId: number): Observable<Session[]>{
+    return this.http.get<Session[]>('/api/films/session/' + filmId);
   }
 }

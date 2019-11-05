@@ -1064,101 +1064,101 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="235" name="id_hall">
+    <column id="263" parent="235" name="id_session">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="264" parent="235" name="place_hall_id_hall_fk">
-      <ColNames>id_hall</ColNames>
+    <column id="264" parent="235" name="price">
+      <Position>6</Position>
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="265" parent="235" name="place_session_id_session_fk">
+      <ColNames>id_session</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="265" parent="235" name="PRIMARY">
+    <key id="266" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_place</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="266" parent="235" name="place_hall_id_hall_fk">
-      <ColNames>id_hall</ColNames>
-      <RefTableName>hall</RefTableName>
-      <RefColNames>id_hall</RefColNames>
+    <foreign-key id="267" parent="235" name="place_session_id_session_fk">
+      <ColNames>id_session</ColNames>
+      <RefTableName>session</RefTableName>
+      <RefColNames>id_session</RefColNames>
     </foreign-key>
-    <column id="267" parent="236" name="id_session">
+    <column id="268" parent="236" name="id_session">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="268" parent="236" name="date">
+    <column id="269" parent="236" name="date">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="236" name="time">
+    <column id="270" parent="236" name="time">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="236" name="id_film">
+    <column id="271" parent="236" name="id_film">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="236" name="id_hall">
+    <column id="272" parent="236" name="id_hall">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="272" parent="236" name="session_film_id_film_fk">
+    <index id="273" parent="236" name="session_film_id_film_fk">
       <ColNames>id_film</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="273" parent="236" name="session_hall_id_hall_fk">
+    <index id="274" parent="236" name="session_hall_id_hall_fk">
       <ColNames>id_hall</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="274" parent="236" name="PRIMARY">
+    <key id="275" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_session</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="275" parent="236" name="session_film_id_film_fk">
+    <foreign-key id="276" parent="236" name="session_film_id_film_fk">
       <ColNames>id_film</ColNames>
       <RefTableName>film</RefTableName>
       <RefColNames>id_film</RefColNames>
     </foreign-key>
-    <foreign-key id="276" parent="236" name="session_hall_id_hall_fk">
+    <foreign-key id="277" parent="236" name="session_hall_id_hall_fk">
       <ColNames>id_hall</ColNames>
       <RefTableName>hall</RefTableName>
       <RefColNames>id_hall</RefColNames>
     </foreign-key>
-    <column id="277" parent="237" name="id_ticket">
+    <column id="278" parent="237" name="id_ticket">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="278" parent="237" name="price">
-      <Position>2</Position>
-      <DataType>double|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
     <column id="279" parent="237" name="id_session">
-      <Position>3</Position>
+      <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="280" parent="237" name="id_place">
-      <Position>4</Position>
+      <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
@@ -1208,7 +1208,6 @@
     <column id="289" parent="238" name="id_wallet">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="290" parent="238" name="role">
@@ -1241,7 +1240,6 @@
     <column id="295" parent="239" name="money">
       <Position>2</Position>
       <DataType>double|0s</DataType>
-      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <key id="296" parent="239" name="PRIMARY">

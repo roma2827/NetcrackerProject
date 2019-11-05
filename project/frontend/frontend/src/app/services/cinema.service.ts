@@ -5,7 +5,7 @@ import { Cinema } from "../modules/models/cinema";
 
 @Injectable()
 // Data service
-export class CinemaService { //todo create interface
+export class CinemaService {
 
   constructor(private http: HttpClient) {
   }
@@ -15,8 +15,8 @@ export class CinemaService { //todo create interface
     return this.http.get<Cinema[]>('/api/cinema')
   }
 
-  getCinemaById(idCinema: number): Observable<Cinema>{
-    return this.http.get<Cinema>('api/cinema/id/' + idCinema);
+  getCinemaById(idCinema: number): Observable<Cinema> {
+    return this.http.get<Cinema>('/api/cinema/id/' + idCinema);
   }
 
   saveCinema(cinema: Cinema): Observable<Cinema> {
@@ -30,4 +30,5 @@ export class CinemaService { //todo create interface
   getCinemaByName(name: string): Observable<Cinema> {
     return this.http.get<Cinema>('/api/cinema/' + name);
   }
+
 }

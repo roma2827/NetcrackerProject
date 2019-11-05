@@ -12,7 +12,6 @@ public class Wallet {
     private Integer idWallet;
 
     @Column
-    @NotNull
     private Double money;
 
     /*@OneToOne(optional = false, mappedBy="wallet")
@@ -21,7 +20,7 @@ public class Wallet {
     public Wallet() {
     }
 
-    public Wallet(@NotNull Double money, User user) {
+    public Wallet(Double money, User user) {
         this.money = money;
 //        this.user = user;
     }

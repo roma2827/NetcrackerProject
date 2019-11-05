@@ -1,4 +1,5 @@
 import { Cinema } from "./cinema";
+import {Place} from "./place";
 
 export class Hall {
   idHall: number;
@@ -6,5 +7,6 @@ export class Hall {
   nSeat: number;
   nRow: number;
   cinema: Cinema;
-  
+  // hallsPlace: Set<Place>;
+
 }

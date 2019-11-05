@@ -1,5 +1,7 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,14 +22,24 @@ public class Place {
     @NotNull
     private Integer row;
 
+    @Column
+    @NotNull
+    private Double price;
+
     @Column(name = "is_free")
     @Size(max = 10)
     @NotNull
     private String isFree;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "id_hall")
-    private Hall hall;
+//    @ManyToOne(cascade = {CascadeType.MERGE})
+//    @JoinColumn(name = "id_hall")
+//    @JsonBackReference
+//    private Hall hall;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "id_session")
+    @JsonBackReference
+    private Session session;
 
 //    @OneToOne(optional = false, mappedBy="place")
 //    public Ticket ticket;
@@ -35,12 +47,21 @@ public class Place {
     public Place() {
     }
 
-    public Place(@NotNull Integer seat, @NotNull Integer row, @Size(max = 10) @NotNull String isFree, Hall hall) {
+    public Place(@NotNull Integer seat, @NotNull Integer row, @NotNull Double price, @Size(max = 10) @NotNull String isFree, Session session) {
         this.seat = seat;
         this.row = row;
+        this.price = price;
         this.isFree = isFree;
-        this.hall = hall;
+        this.session = session;
     }
+
+    //    public Place(@NotNull Integer seat, @NotNull Integer row, @Size(max = 10) @NotNull String isFree, Session session) {
+//        this.seat = seat;
+//        this.row = row;
+//        this.isFree = isFree;
+////        this.hall = hall;
+//        this.session = session;
+//    }
 
     /*public Ticket getTicket() {
         return ticket;
@@ -49,6 +70,22 @@ public class Place {
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }*/
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
 
     public Integer getIdPlace() {
         return idPlace;
@@ -74,13 +111,13 @@ public class Place {
         this.row = row;
     }
 
-    public Hall getHall() {
-        return hall;
-    }
-
-    public void setHall(Hall hall) {
-        this.hall = hall;
-    }
+//    public Hall getHall() {
+//        return hall;
+//    }
+//
+//    public void setHall(Hall hall) {
+//        this.hall = hall;
+//    }
 
     public String getIsFree() {
         return isFree;

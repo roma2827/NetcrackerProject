@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.controller;
 
 import com.netcracker.edu.backend.entity.Film;
+import com.netcracker.edu.backend.entity.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +41,11 @@ public class FilmController {
     @RequestMapping(value = "/{filmId}", method = RequestMethod.DELETE)
     public void deleteFilm(@PathVariable(name = "filmId") Integer filmId){
         filmService.delete(filmId);
+    }
+
+    @RequestMapping(value = "/session/{filmId}", method = RequestMethod.GET)
+    public ResponseEntity<List<Session>> getSessionByFilmId(@PathVariable(name = "filmId") Integer filmId){
+        List<Session> sessions = filmService.findSessionsByFilmId(filmId);
+        return ResponseEntity.ok(sessions);
     }
 }

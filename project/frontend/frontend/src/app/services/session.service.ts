@@ -2,22 +2,20 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { Session } from "../modules/models/session";
+import {Hall} from "../modules/models/hall";
+import {Film} from "../modules/film/models/film";
+import {Place} from "../modules/models/place";
 
 @Injectable()
 // Data service
-export class SessionService { //todo create interface
+export class SessionService {
 
   constructor(private http: HttpClient) {
   }
 
-  // Ajax request for billing account data
   getSessions(): Observable<Session[]> {
     return this.http.get<Session[]>('/api/session')
   }
-
-  // getFilmById(filmId: number): Observable<Film>{
-  //   return this.http.get<Film>('api/films/id/' + filmId);
-  // }
 
   saveSession(session: Session): Observable<Session> {
     return this.http.post<Session>('/api/session', session);
@@ -27,8 +25,16 @@ export class SessionService { //todo create interface
     return this.http.delete<void>('/api/session/' + idSession);
   }
 
-  // getFilmByName(name: string): Observable<Film> {
-  //   return this.http.get<Film>('/api/films/' + name);
-  // }
-  
+  getHallByIdSession(idSession: number): Observable<Hall> {
+    return this.http.get<Hall>('api/session/hall/' + idSession);
+  }
+
+  getPlacesByIdSession(idSession: number): Observable<Place[]> {
+    return this.http.get<Place[]>('api/session/place/' + idSession);
+  }
+
+  getSessionById(idSession: number): Observable<Session> {
+    return this.http.get<Session>('/api/session/id/' + idSession);
+  }
+
 }

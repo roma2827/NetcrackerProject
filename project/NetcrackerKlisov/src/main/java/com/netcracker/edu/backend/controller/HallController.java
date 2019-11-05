@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.controller;
 
 import com.netcracker.edu.backend.entity.Hall;
+import com.netcracker.edu.backend.entity.Place;
 import com.netcracker.edu.backend.service.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class HallController {
     @Autowired
     private HallService hallService;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Hall> getHallAll(){
         return hallService.findAll();
     }
@@ -35,4 +36,10 @@ public class HallController {
         Hall hall = hallService.findByName(name);
         return ResponseEntity.ok(hall);
     }
+
+//    @RequestMapping(value = "/places/{idHall}", method = RequestMethod.GET)
+//    public ResponseEntity<List<Place>> getPlaces(@PathVariable(name = "idHall") Integer idHall){
+//        List<Place> places = hallService.findPlacesByIdHall(idHall);
+//        return ResponseEntity.ok(places);
+//    }
 }

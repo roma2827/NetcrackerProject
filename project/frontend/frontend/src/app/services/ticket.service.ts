@@ -6,7 +6,7 @@ import { Ticket } from "../modules/models/ticket";
 
 @Injectable()
 // Data service
-export class TicketService { //todo create interface
+export class TicketService {
 
   constructor(private http: HttpClient) {
   }
@@ -23,5 +23,5 @@ export class TicketService { //todo create interface
   deleteTicket(idTicket: number): Observable<void> {
     return this.http.delete<void>('/api/ticket/' + idTicket);
   }
-  
+
 }

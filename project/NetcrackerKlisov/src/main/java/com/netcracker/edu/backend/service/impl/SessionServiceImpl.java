@@ -1,5 +1,7 @@
 package com.netcracker.edu.backend.service.impl;
 
+import com.netcracker.edu.backend.entity.Hall;
+import com.netcracker.edu.backend.entity.Place;
 import com.netcracker.edu.backend.entity.Session;
 import com.netcracker.edu.backend.repository.SessionRepository;
 import com.netcracker.edu.backend.service.SessionService;
@@ -38,5 +40,20 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public void delete(Integer idSession){
         sessionRepository.deleteById(idSession);
+    }
+
+    @Override
+    public Hall findHall(Integer idSession){
+        return sessionRepository.findHall(idSession);
+    }
+
+    @Override
+    public List<Place> findSessionPlace(Integer idSession){
+        return sessionRepository.findSessionPlace(idSession);
+    }
+
+    @Override
+    public Session findByIdSession(Integer idSession){
+        return sessionRepository.findByIdSession(idSession);
     }
 }

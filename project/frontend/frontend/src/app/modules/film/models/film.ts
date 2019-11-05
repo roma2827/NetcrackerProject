@@ -1,3 +1,5 @@
+import {Session} from "../../models/session";
+
 export class Film {
   filmId: number;
   name: string;
@@ -5,4 +7,5 @@ export class Film {
   time: number;
   startData: number;
   endData: number;
+  films: Set<Session>;
 }

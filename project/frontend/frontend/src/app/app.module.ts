@@ -12,11 +12,14 @@ import {FilmComponent} from './modules/film/film.component'
 import {HeaderModule} from './modules/header/header.module'
 import {FilmDetailComponent} from './modules/film-detail/film.detail.component'
 import {HomeComponent} from './modules/home/home.component'
+import {HeaderComponent} from "./modules/header/components/header.component";
+import {HallComponent} from "./modules/hall/hall.component";
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'films', component: FilmComponent },
-  { path: 'detail/:filmId', component: FilmDetailComponent}
+  { path: 'detail/:filmId', component: FilmDetailComponent},
+  { path: 'hall/:idSession', component: HallComponent}
 ];
 
 @NgModule({

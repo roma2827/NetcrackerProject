@@ -1,5 +1,8 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
@@ -22,31 +25,36 @@ public class Session {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_film", nullable = false)
+    @JsonBackReference
     private Film film;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_hall", nullable = false)
+//    @JsonBackReference
     private Hall hall;
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "session")
-//    private Set<Ticket> sessions;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "session")
+    @JsonManagedReference
+    private Set<Place> sessionsPlace;
 
     public Session() {
     }
 
-    public Session(@NotNull Integer date, @NotNull Double time, Film film, Hall hall) {
+    public Session(@NotNull Integer date, @NotNull Double time, Film film, Hall hall, Set<Place> sessionsPlace) {
         this.date = date;
         this.time = time;
         this.film = film;
         this.hall = hall;
+        this.sessionsPlace = sessionsPlace;
     }
-//    public Set<Ticket> getSessions() {
-//        return sessions;
-//    }
-//
-//    public void setSessions(Set<Ticket> sessions) {
-//        this.sessions = sessions;
-//    }
+
+    public Set<Place> getSessionsPlace() {
+        return sessionsPlace;
+    }
+
+    public void setSessionsPlace(Set<Place> sessionsPlace) {
+        this.sessionsPlace = sessionsPlace;
+    }
 
     public Hall getHall() {
         return hall;

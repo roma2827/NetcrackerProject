@@ -2,11 +2,12 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { Place } from "../modules/models/place";
+import {Cinema} from "../modules/models/cinema";
 
 
 @Injectable()
 // Data service
-export class PlaceService { //todo create interface
+export class PlaceService {
 
   constructor(private http: HttpClient) {
   }
@@ -23,5 +24,13 @@ export class PlaceService { //todo create interface
   deletePlace(idPlace: number): Observable<void> {
     return this.http.delete<void>('/api/place/' + idPlace);
   }
-  
+
+  updatePlace(idPlace: number): Observable<void> {
+    return this.http.post<void>('/api/place/update-place', idPlace);
+  }
+
+  getPlaceById(idPlace: number): Observable<Place> {
+    return this.http.get<Place>('/api/place/' + idPlace);
+  }
+
 }

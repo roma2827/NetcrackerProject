@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.service.impl;
 
 import com.netcracker.edu.backend.entity.Film;
+import com.netcracker.edu.backend.entity.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.netcracker.edu.backend.repository.FilmRepository;
@@ -36,5 +37,10 @@ public class FilmServerImpl implements FilmService {
     @Override
     public void delete(Integer filmId){
         filmRepository.deleteById(filmId);
+    }
+
+    @Override
+    public List<Session> findSessionsByFilmId(Integer filmId){
+        return filmRepository.findSessionsByIdFilm(filmId);
     }
 }

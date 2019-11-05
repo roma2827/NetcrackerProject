@@ -29,4 +29,14 @@ public class PlaceServiceImpl implements PlaceService {
     public void delete(Integer idPlace){
         placeRepository.deleteById(idPlace);
     }
+
+    @Override
+    public void updatePlaceIsFree(Integer idPlace){
+        placeRepository.updatePlaceIsFree(idPlace);
+    }
+
+    @Override
+    public Place findByIdPlace(Integer idPlace) {
+        return placeRepository.findByIdPlace(idPlace);
+    }
 }

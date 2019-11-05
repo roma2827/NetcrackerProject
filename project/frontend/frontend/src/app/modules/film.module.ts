@@ -9,10 +9,15 @@ import {FilmComponent} from '../modules/film/film.component';
 import {FilmDetailComponent} from './film-detail/film.detail.component';
 import {HomeComponent} from '../modules/home/home.component'
 import {SessionService} from '../services/session.service'
+import {HallComponent} from "./hall/hall.component";
+import {HallService} from "../services/hall.service";
+import {PlaceService} from "../services/place.service";
+import {TicketService} from "../services/ticket.service";
 
 
 @NgModule({
   declarations: [
+    HallComponent,
     FilmComponent,
     FilmDetailComponent,
     HomeComponent
@@ -26,8 +31,8 @@ import {SessionService} from '../services/session.service'
 
   ],
 
-  providers: [FilmService, SessionService],
-  exports: [FilmComponent, FilmDetailComponent,HomeComponent]
+  providers: [FilmService, SessionService, HallService, PlaceService, TicketService],
+  exports: [FilmComponent, FilmDetailComponent, HomeComponent, HallComponent]
 })
 export class FilmModule {
 }

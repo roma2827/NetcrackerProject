@@ -1,5 +1,7 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
@@ -40,19 +42,37 @@ public class Film {
     //@FutureOrPresent
     private  Integer endData;
 
-    /*@OneToMany(fetch = FetchType.EAGER, mappedBy = "film")
-    private Set<Session> films;*/
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "film")
+    @JsonManagedReference
+    private Set<Session> films;
 
     public Film() {
     }
 
-    /*public Set<Session> getFilms() {
+    public Film(@NotNull @Size(max = 50) String name, @NotNull @Size(max = 200) String description, @NotNull Double time, @NotNull Integer startData, @NotNull Integer endData) {
+        this.name = name;
+        this.description = description;
+        this.time = time;
+        this.startData = startData;
+        this.endData = endData;
+    }
+
+    public Film(@NotNull @Size(max = 50) String name, @NotNull @Size(max = 200) String description, @NotNull Double time, @NotNull Integer startData, @NotNull Integer endData, Set<Session> films) {
+        this.name = name;
+        this.description = description;
+        this.time = time;
+        this.startData = startData;
+        this.endData = endData;
+        this.films = films;
+    }
+
+    public Set<Session> getFilms() {
         return films;
     }
 
     public void setFilms(Set<Session> films) {
         this.films = films;
-    }*/
+    }
 
     public Integer getFilmId() {
         return filmId;

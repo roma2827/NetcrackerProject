@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.service.impl;
 
 import com.netcracker.edu.backend.entity.Hall;
+import com.netcracker.edu.backend.entity.Place;
 import com.netcracker.edu.backend.repository.HallRepository;
 import com.netcracker.edu.backend.service.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +34,9 @@ public class HallServiceImpl implements HallService {
     public void delete(Integer idHall){
         hallRepository.deleteById(idHall);
     }
+
+//    @Override
+//    public List<Place> findPlacesByIdHall(Integer idHall){
+//        return hallRepository.findPlaceByIdHall(idHall);
+//    }
 }

@@ -1,5 +1,7 @@
 package com.netcracker.edu.backend.controller;
 
+import com.netcracker.edu.backend.entity.Hall;
+import com.netcracker.edu.backend.entity.Place;
 import com.netcracker.edu.backend.entity.Session;
 import com.netcracker.edu.backend.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +43,23 @@ public class SessionController {
     @RequestMapping(value = "/{idSession}", method = RequestMethod.DELETE)
     public void deleteSession(@PathVariable(name = "idSession") Integer idSession){
         sessionService.delete(idSession);
+    }
+
+    @RequestMapping(value = "/hall/{idSession}", method = RequestMethod.GET)
+    public ResponseEntity<Hall> getHall(@PathVariable(name = "idSession") Integer idSession){
+        Hall hall = sessionService.findHall(idSession);
+        return ResponseEntity.ok(hall);
+    }
+
+    @RequestMapping(value = "/place/{idSession}", method = RequestMethod.GET)
+    public ResponseEntity<List<Place>> getPlaces(@PathVariable(name = "idSession") Integer idSession){
+        List<Place> places = sessionService.findSessionPlace(idSession);
+        return ResponseEntity.ok(places);
+    }
+
+    @RequestMapping(value = "/id/{idSession}", method = RequestMethod.GET)
+    public ResponseEntity<Session> getSessionByIdSession(@PathVariable(name = "idSession") Integer idSession){
+        Session session = sessionService.findByIdSession(idSession);
+        return ResponseEntity.ok(session);
     }
 }

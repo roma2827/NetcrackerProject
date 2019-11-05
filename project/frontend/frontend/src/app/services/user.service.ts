@@ -6,14 +6,14 @@ import { User } from "../modules/models/user";
 
 @Injectable()
 // Data service
-export class UserService { //todo create interface
+export class UserService {
 
   constructor(private http: HttpClient) {
   }
 
   // Ajax request for billing account data
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('/api/user')
+    return this.http.get<User[]>('/api/user');
   }
 
   saveUser(user: User): Observable<User> {
@@ -27,5 +27,4 @@ export class UserService { //todo create interface
   getUserByLogin(login: string): Observable<User> {
     return this.http.get<User>('/api/user/' + login);
   }
-  
 }

@@ -1,6 +1,6 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef} from '@angular/core';
 import {Film} from './models/film'
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 import {FilmService} from '../../services/film.service'
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 
@@ -8,7 +8,7 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
   selector: 'app-film',
   templateUrl: './film.component.html',
 })
-export class FilmComponent implements OnInit {
+export class FilmComponent implements OnInit, OnDestroy {
 
   public editMode = false;
 
@@ -19,7 +19,8 @@ export class FilmComponent implements OnInit {
   public modalRef: BsModalRef;
 
   constructor(private modalService: BsModalService,
-    private filmService: FilmService) {  }
+              private filmService: FilmService) {
+  }
 
 
   ngOnDestroy(): void {
@@ -31,20 +32,14 @@ export class FilmComponent implements OnInit {
   }
 
 
-
-
-
   public _closeModal(): void {
     this.modalRef.hide();
   }
 
   public _openModal(template: TemplateRef<any>, film: Film): void {
-
     if (film) {
-      console.log(film)
       this.editMode = true;
       this.editableBa = film;
-      console.log(this.editableBa)
     } else {
       this.refreshBa();
       this.editMode = false;
