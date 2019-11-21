@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.controller;
 
 import com.netcracker.edu.backend.entity.Cinema;
+import com.netcracker.edu.backend.entity.Hall;
 import com.netcracker.edu.backend.service.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CinemaController {
         return ResponseEntity.ok(cinema);
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Cinema> getCinemaService(){
         return cinemaService.findAll();
     }
@@ -40,5 +41,11 @@ public class CinemaController {
     public ResponseEntity<Cinema> getCinemaById(@PathVariable(name = "idCinema") Integer idCinema){
         Cinema cinema = cinemaService.findByIdCinema(idCinema);
         return ResponseEntity.ok(cinema);
+    }
+
+    @RequestMapping(value = "/halls/{idCinema}", method = RequestMethod.GET)
+    public ResponseEntity<List<Hall>> getHallsByIdCinema(@PathVariable(name = "idCinema") Integer idCinema){
+        List<Hall> halls = cinemaService.findHallsByIdCinema(idCinema);
+        return ResponseEntity.ok(halls);
     }
 }

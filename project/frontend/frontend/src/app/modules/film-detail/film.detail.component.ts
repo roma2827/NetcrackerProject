@@ -1,39 +1,82 @@
 import {Component, OnInit, Input, TemplateRef, OnDestroy} from '@angular/core';
-import { Film } from '../film/models/film';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Film} from '../film/models/film';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 import {FilmService} from '../../services/film.service';
 import {Session} from '../models/session';
 import {SessionService} from '../../services/session.service';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap';
 import {Hall} from "../models/hall";
-import {Place} from "../models/place";
+import {HallService} from "../../services/hall.service";
+import {CinemaService} from "../../services/cinema.service";
+import {Cinema} from "../models/cinema";
+
 
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film.detail.component.html',
+  styleUrls: ["./film.detail.component.css"]
 })
 export class FilmDetailComponent implements OnInit, OnDestroy {
 
+  // public _currentHalls: Hall[];
+  // public _currentCinema: Cinema;
+  public cinemas: Cinema[];
+  public halls: Hall[];
+  public editSessionMode = false;
+  public editableS: Session = new Session();
+  public editableC: Cinema = new Cinema();
+  public editableH: Hall = new Hall();
+  public modalSessionRef: BsModalRef;
+  public modalCinemaRef: BsModalRef;
+  public modalHallRef: BsModalRef;
+  // public session: Session;
   film: Film;
   public sessions: Session[];
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private cinemaService: CinemaService,
+    private hallService: HallService,
+    private modalService: BsModalService,
     private activateRoute: ActivatedRoute,
     private filmService: FilmService,
     private router: Router,
     private sessionService: SessionService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     const filmId = this.activateRoute.snapshot.params['filmId'];
-    if(filmId){
+    if (filmId) {
       this.subscriptions.push(this.filmService.getFilmById(filmId).subscribe(data => {
         this.film = data;
       }));
     }
     this._getSessions(filmId);
+  }
+
+  public _getHalls(): void {
+    this.subscriptions.push(this.hallService.getHalls().subscribe(data => {
+      this.halls = data as Hall[];
+    }));
+  }
+
+  // public _getHallsByIdCinema(idCinema: number): void {
+  //   this.subscriptions.push((this.cinemaService.getHallsByIdCinema(idCinema).subscribe(data => {
+  //     this._currentHalls = data as Hall[];
+  //   })));
+  // }
+  //
+  // public _onChengeCinema(event): void {
+  //   this._currentCinema = event.value;
+  //   this._getHallsByIdCinema(this._currentCinema.idCinema);
+  // }
+
+  public _getCinemas(): void {
+    this.subscriptions.push(this.cinemaService.getCinemas().subscribe(data => {
+      this.cinemas = data as Cinema[];
+    }));
   }
 
   public _getSessions(filmId: number): void {
@@ -43,9 +86,8 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public _deleteFilm(filmId: number): void {
-    console.log(filmId)
+    console.log(filmId);
     this.subscriptions.push(this.filmService.deleteFilm(filmId).subscribe(() => {
-      this.ngOnInit();
     }));
   }
 
@@ -58,4 +100,91 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
+
+  // AddSession
+  public _openAddSessionModal(template: TemplateRef<any>): void {
+
+    // if (this.session) {
+    //   this.editSessionMode = true;
+    //   this.editableS = this.session;
+    // } else {
+    //   this.refreshS();
+    //   this.editSessionMode = false;
+    // }
+
+    this.modalSessionRef = this.modalService.show(template);
+  }
+
+  public _closeSessionModal(): void {
+    this.modalSessionRef.hide();
+  }
+
+  public _addSession(film: Film): void {
+    this.editableS.film = film;
+    // this.editableS.hall.name = hal;
+    this.subscriptions.push(this.sessionService.saveSession(this.editableS).subscribe(() => {
+      this._updateFilmDetail();
+      this.refreshS();
+      this._closeSessionModal();
+    }));
+  }
+
+  public _updateFilmDetail(): void {
+    this.loadFilmDetail();
+  }
+
+  private refreshS(): void {
+    this.editableS = new Session();
+  }
+
+  private loadFilmDetail(): void {
+    this.ngOnInit();
+  }
+
+//  AddCinema
+
+
+  public _openAddCinemaModal(templateAddCinema: TemplateRef<any>): void {
+    this.modalCinemaRef = this.modalService.show(templateAddCinema);
+  }
+
+  public _closeCinemaModal(): void {
+    this.modalCinemaRef.hide();
+  }
+
+  public _addCinema(): void {
+    this.subscriptions.push(this.cinemaService.saveCinema(this.editableC).subscribe(() => {
+      this._updateFilmDetail();
+      this.refreshC();
+      this._closeCinemaModal();
+    }));
+  }
+
+  private refreshC(): void {
+    this.editableC = new Cinema();
+  }
+
+
+//  AddHall
+
+  public _openAddHallModal(templateAddHall: TemplateRef<any>): void {
+    this.modalHallRef = this.modalService.show(templateAddHall);
+  }
+
+  public _closeHallModal(): void {
+    this.modalHallRef.hide();
+  }
+
+  public _addHall(): void {
+    this.subscriptions.push(this.hallService.saveHall(this.editableH).subscribe(() => {
+      this._updateFilmDetail();
+      this.refreshH();
+      this._closeHallModal();
+    }));
+  }
+
+  private refreshH(): void {
+    this.editableH = new Hall();
+  }
+
 }

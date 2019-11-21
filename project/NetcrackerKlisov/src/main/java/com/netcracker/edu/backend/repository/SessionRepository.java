@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.repository;
 
+import com.netcracker.edu.backend.entity.Film;
 import com.netcracker.edu.backend.entity.Hall;
 import com.netcracker.edu.backend.entity.Place;
 import com.netcracker.edu.backend.entity.Session;
@@ -23,4 +24,7 @@ public interface SessionRepository extends CrudRepository<Session, Integer> {
 
     @Query("select s.sessionsPlace from Session s where s.idSession = :idSession")
     List<Place> findSessionPlace(@Param("idSession") Integer idSession);
+
+    @Query("select s.film from Session s where s.idSession = :idSession")
+    Film findFilmByIdSession(@Param("idSession") Integer idSession);
 }

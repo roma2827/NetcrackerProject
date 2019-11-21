@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -38,7 +39,8 @@ public class Place {
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_session")
-    @JsonBackReference
+//    @JsonBackReference
+    @JsonIgnore
     private Session session;
 
 //    @OneToOne(optional = false, mappedBy="place")

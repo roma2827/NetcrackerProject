@@ -1,0 +1,86 @@
+.film__detail__header {
+  padding: 20px 30px;
+  font-weight: 900;
+  font-size: 60px;
+  color: rgb(68, 63, 63);
+  width: 80%;
+}
+
+.film__detail {
+  max-width: 1000px;
+  padding: 20px 30px;
+  display: flex;
+  margin-left: 77px;
+}
+
+.film__imj {
+  width: 20%;
+}
+
+.film__detail__main {
+  display: block;
+  max-width: 1000px;
+  padding: 0px 0px;
+  /*margin: 15px;*/
+}
+
+.session {
+  display: block;
+  max-width: 1000px;
+}
+
+.show__session {
+  display: flex;
+  padding: 40px 0px;
+  max-width: 1000px;
+}
+
+.show__session__and__line {
+  display: block;
+}
+
+.hall__info {
+  width: 20%;
+  padding: 20px 30px;
+  font-weight: 400;
+  font-size: 10px;
+  color: grey;
+}
+
+.session__info {
+  width: 80%;
+  padding: 0px 60px;
+}
+
+
+.select__session {
+  color: #494949;
+  text-decoration: none;
+  background: none;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid grey;
+  display: inline-block;
+  transition: all 0.4s ease 0s;
+}
+
+.select__session:hover {
+  border-color: black;
+  color: black;
+  transition: all 0.4s ease 0s;
+}
+
+.show__description__name {
+  padding: 1px 50px;
+  font-weight: 600;
+  font-size: 30px;
+  color: rgb(68, 63, 63);
+
+}
+
+.description__text {
+  padding: 1px 80px;
+  font-weight: 400;
+  font-size: 20px;
+  color: grey;
+}

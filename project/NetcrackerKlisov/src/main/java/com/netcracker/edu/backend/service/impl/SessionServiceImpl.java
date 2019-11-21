@@ -1,10 +1,14 @@
 package com.netcracker.edu.backend.service.impl;
 
+import com.netcracker.edu.backend.entity.Film;
 import com.netcracker.edu.backend.entity.Hall;
 import com.netcracker.edu.backend.entity.Place;
 import com.netcracker.edu.backend.entity.Session;
+import com.netcracker.edu.backend.repository.PlaceRepository;
 import com.netcracker.edu.backend.repository.SessionRepository;
+import com.netcracker.edu.backend.repository.TicketRepository;
 import com.netcracker.edu.backend.service.SessionService;
+import com.netcracker.edu.backend.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,12 @@ public class SessionServiceImpl implements SessionService {
 
     @Autowired
     private SessionRepository sessionRepository;
+
+    @Autowired
+    private TicketService ticketService;
+
+    @Autowired
+    private PlaceRepository placeRepository;
 
     @Override
     public List<Session> findAll(){
@@ -39,6 +49,8 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public void delete(Integer idSession){
+        Session session = sessionRepository.findByIdSession(idSession);
+        session.getTickets().forEach(ticket -> ticketService.delete(ticket.getIdTicket()));
         sessionRepository.deleteById(idSession);
     }
 
@@ -55,5 +67,10 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public Session findByIdSession(Integer idSession){
         return sessionRepository.findByIdSession(idSession);
+    }
+
+    @Override
+    public Film findFilmByIdSession(Integer idSession) {
+        return sessionRepository.findFilmByIdSession(idSession);
     }
 }

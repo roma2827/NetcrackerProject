@@ -8,4 +8,5 @@ export class Film {
   startData: number;
   endData: number;
   films: Set<Session>;
+  imj: string;
 }

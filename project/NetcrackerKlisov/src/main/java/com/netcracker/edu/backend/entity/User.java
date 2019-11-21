@@ -1,10 +1,13 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -35,6 +38,13 @@ public class User {
     @JoinColumn(name="id_wallet")
     private Wallet wallet;
 
+//    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    @JoinColumn(name="id_ticket", unique = true)
+//    private Ticket ticket;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @JsonIgnore
+    private Set<Ticket> tickets;
+
     public User() {
     }
 
@@ -42,6 +52,14 @@ public class User {
         this.login = login;
         this.password = password;
         this.wallet = wallet;
+    }
+
+    public User(@NotNull @Size(max = 10) String role, @NotNull @Size(max = 20) String login, @NotNull @Size(max = 20) String password, Wallet wallet, Set<Ticket> tickets) {
+        this.role = role;
+        this.login = login;
+        this.password = password;
+        this.wallet = wallet;
+        this.tickets = tickets;
     }
 
     @Override
@@ -57,6 +75,14 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(idUser, login, password);
+    }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     public Wallet getWallet() {

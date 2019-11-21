@@ -1,16 +1,32 @@
-<h2>All Film</h2>
-<ul class="films">
-  <li *ngFor="let film of films">
-    <a routerLink="/detail/{{film.filmId}}">
-     {{film.name}}
-    </a>
-  </li>
-</ul>
+<div class="container films__header">
+  <div class="poster__title">
+    Movie poster
+  </div>
+</div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+<div class="all__films">
+  <hr align="center" width="90%" size="50" color="black"/>
+  <div class="film__block" *ngFor="let film of films">
+    <div class="film__imj">
+      <img src="{{film.imj}}" width="161.75" height="300">
+    </div>
+    <div class="film__name">
+      {{film.name}}
+    </div>
+    <div class="button_cont" align="center">
+      <a class="buy-ticket-button-all-films" routerLink="/detail/{{film.filmId}}" rel="nofollow noopener">
+      Buy Ticket
+    </a></div>
+  </div>
+</div>
+
+
+
+<!--Add Film-->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addFilmModal"
 (click)="_openModal(template)">
   Add Film
-</button> 
+</button>
 
 <ng-template #template>
   <div class="modal-header">

@@ -22,7 +22,7 @@ export class SessionService {
   }
 
   deleteSession(idSession: number): Observable<void> {
-    return this.http.delete<void>('/api/session/' + idSession);
+    return this.http.delete<void>("/api/session/" + idSession);
   }
 
   getHallByIdSession(idSession: number): Observable<Hall> {
@@ -37,4 +37,7 @@ export class SessionService {
     return this.http.get<Session>('/api/session/id/' + idSession);
   }
 
+  getFilmByIdSession(idSession: number): Observable<Film> {
+    return this.http.get<Film>('api/session/film/' + idSession);
+  }
 }

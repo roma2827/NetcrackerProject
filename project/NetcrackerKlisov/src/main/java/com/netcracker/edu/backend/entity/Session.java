@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -24,28 +25,34 @@ public class Session {
     private Double time;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_film", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "id_film")
+//    @JsonIgnore
     private Film film;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "id_hall", nullable = false)
+    @JoinColumn(name = "id_hall")
 //    @JsonBackReference
     private Hall hall;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "session")
-    @JsonManagedReference
+    @OneToMany(orphanRemoval=true, fetch = FetchType.EAGER, mappedBy = "session")
+//    @JsonManagedReference
+    @JsonIgnore
     private Set<Place> sessionsPlace;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "session")
+    @JsonIgnore
+    private Set<Ticket> tickets;
 
     public Session() {
     }
 
-    public Session(@NotNull Integer date, @NotNull Double time, Film film, Hall hall, Set<Place> sessionsPlace) {
+    public Session(@NotNull Integer date, @NotNull Double time, Film film, Hall hall, Set<Place> sessionsPlace, Set<Ticket> tickets) {
         this.date = date;
         this.time = time;
         this.film = film;
         this.hall = hall;
         this.sessionsPlace = sessionsPlace;
+        this.tickets = tickets;
     }
 
     public Set<Place> getSessionsPlace() {
@@ -94,5 +101,13 @@ public class Session {
 
     public void setFilm(Film film) {
         this.film = film;
+    }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }

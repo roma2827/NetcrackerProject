@@ -8,64 +8,31 @@ import {UserService} from "../../../services/user.service";
 
 @Component({
   selector: "app-header",
-  templateUrl: "./header.component.html"
+  templateUrl: "./header.component.html",
+  styleUrls: ["./header.component.css"]
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  public users: User[];
-  public editRegistrationMode = false;
-  public editMode = false;
-  public films: Film[];
   private subscriptions: Subscription[] = [];
   public editableUs: User = new User();
-  public editableBa: Film = new Film();
   public modalRegistrationRef: BsModalRef;
-  public modalRef: BsModalRef;
+  public modalSignInRef: BsModalRef;
+  private exceptionText: String;
 
-  constructor(private  userService: UserService,
-    private modalService: BsModalService,
-    private filmService: FilmService) {}
+  constructor(
+    private  userService: UserService,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit() {
   }
 
-  public _closeModal(): void {
-    this.modalRef.hide();
+  public _closeSignInModal(): void {
+    this.modalSignInRef.hide();
   }
 
-  public _openModal(template: TemplateRef<any>, film: Film): void {
-
-    if (film) {
-      this.editMode = true;
-      this.editableBa = film;
-    } else {
-      this.refreshBa();
-      this.editMode = false;
-    }
-
-    this.modalRef = this.modalService.show(template);
-  }
-
-  public _addFilm(): void {
-    this.subscriptions.push(this.filmService.saveFilm(this.editableBa).subscribe(() => {
-      this._updateFilms();
-      this.refreshBa();
-      this._closeModal();
-    }));
-  }
-
-  public _updateFilms(): void {
-    this.loadFilms();
-  }
-
-  private refreshBa(): void {
-    this.editableBa = new Film();
-  }
-
-  private loadFilms(): void {
-    this.subscriptions.push(this.filmService.getFilms().subscribe(data => {
-      this.films = data as Film[];
-    }));
+  public _openSignInModal(template: TemplateRef<any>): void {
+    this.modalSignInRef = this.modalService.show(template);
   }
 
   ngOnDestroy(): void {
@@ -73,16 +40,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   // Registration
-  public _openRegistrationModal(template: TemplateRef<any>, user: User): void {
-
-    if (user) {
-      this.editRegistrationMode = true;
-      this.editableUs = user;
-    } else {
-      this.refreshUs();
-      this.editRegistrationMode = false;
-    }
-
+  public _openRegistrationModal(template: TemplateRef<any>): void {
     this.modalRegistrationRef = this.modalService.show(template);
   }
 
@@ -92,23 +50,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public _addUser(): void {
     this.subscriptions.push(this.userService.saveUser(this.editableUs).subscribe(() => {
-      this._updateUsers();
       this.refreshUs();
       this._closeRegistrationModal();
     }));
   }
 
-  public _updateUsers(): void {
-    this.loadUsers();
+  public _login(): void {
+    this.subscriptions.push(this.userService.login(this.editableUs).subscribe(data => {
+      this.exceptionText = data;
+      this.refreshUs();
+      this._closeSignInModal();
+    }));
   }
 
   private refreshUs(): void {
     this.editableUs = new User();
-  }
-
-  private loadUsers(): void {
-    this.subscriptions.push(this.userService.getUsers().subscribe(data => {
-      this.users = data as User[];
-    }));
   }
 }

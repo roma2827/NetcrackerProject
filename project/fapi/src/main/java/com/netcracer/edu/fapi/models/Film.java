@@ -1,5 +1,7 @@
 package com.netcracer.edu.fapi.models;
 
+import java.util.Set;
+
 public class Film {
 
     private Integer filmId;
@@ -8,17 +10,27 @@ public class Film {
     private String description;
     private Integer starData;
     private Integer endData;
+    private Set<Session> films;
 
     public Film() {
     }
 
-    public Film(Integer filmId, String name, Double time, String description, Integer starData, Integer endData) {
+    public Film(Integer filmId, String name, Double time, String description, Integer starData, Integer endData, Set<Session> films) {
         this.filmId = filmId;
         this.name = name;
         this.time = time;
         this.description = description;
         this.starData = starData;
         this.endData = endData;
+        this.films = films;
+    }
+
+    public Set<Session> getFilms() {
+        return films;
+    }
+
+    public void setFilms(Set<Session> films) {
+        this.films = films;
     }
 
     public Integer getFilmId() {

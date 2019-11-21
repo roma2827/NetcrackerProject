@@ -12,9 +12,8 @@ export class HallService {
   constructor(private http: HttpClient) {
   }
 
-  // Ajax request for billing account data
   getHalls(): Observable<Hall[]> {
-    return this.http.get<Hall[]>('/api/hall')
+    return this.http.get<Hall[]>('/api/hall');
   }
 
   getHallById(idHall: number): Observable<Hall>{

@@ -1,0 +1,93 @@
+<h1>Welcome {{user.login}} money {{user.wallet.money}}</h1>
+<h1>Password {{user.password}}</h1>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal"
+        (click)="_openChangePasswordModal(passwordTemplate, user)">
+  Change password
+</button>
+
+
+<h1>Your ticket</h1>
+<div class="row">
+  <div class="" *ngFor="let ticket of tickets">
+    <div>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticketInfoModal"
+              (click)="_openTicketInfoModal(ticketInfoTemplate, ticket)">
+        <div><span>Date: </span>{{ticket.session.date}}</div>
+        <div><span>Time: </span>{{ticket.session.time}}</div>
+        <div><span>hall: </span>{{ticket.session.hall.name}}</div>
+        <div><span>cinema: </span>{{ticket.session.hall.cinema.name}}</div>
+        <div><span>address: </span>{{ticket.session.hall.cinema.address}}</div>
+<!--        <button type="button" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>-->
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #passwordTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> Change password</h4>
+    <button type="button" class="close pull-right"
+            aria-label="Close" (click)="_closeChangePasswordModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="password1">pls set new password</label>
+      <input type="password" class="form-control" id="password1" name="password" [(ngModel)]="password" required/>
+      <div class="valid-tooltip">
+        Looks good!
+      </div>
+<!--      <div class="alert alert-danger">-->
+<!--&lt;!&ndash;        [hidden]="password.valid || password.untouched" &ndash;&gt;-->
+<!--        Pls set new password-->
+<!--      </div>-->
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="_changePassword(password)">Save
+<!--            [disabled]="password.invalid "-->
+    </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeChangePasswordModal()">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #ticketInfoTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left"> Ticket Info</h4>
+    <button type="button" class="close pull-right"
+            aria-label="Close" (click)="_closeTicketInfoModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <div class="form-group">
+        <h5>Film {{editableT.session.film.name}}</h5>
+      </div>
+      <div class="form-group">
+        <h5>Session time {{editableT.session.time}}</h5>
+      </div>
+      <div class="form-group">
+        <h5>Session date {{editableT.session.date}}</h5>
+      </div>
+      <div class="form-group">
+        <h5>Address {{editableT.session.hall.cinema.address}}</h5>
+      </div>
+      <div class="form-group">
+        <h5>Your place seat {{editableT.place.seat}} row {{editableT.place.row}}</h5>
+      </div>
+      <div class="form-group">
+        <h5>Price {{editableT.place.price}} p</h5>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="_deleteTicket()">Hand over a ticket
+      <!--            [disabled]="password.invalid "-->
+    </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeTicketInfoModal()">Close</button>
+  </div>
+</ng-template>
+

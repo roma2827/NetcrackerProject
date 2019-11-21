@@ -1,17 +1,16 @@
 <nav class="navbar navdar-default" style="background-color: rgb(68, 63, 63)">
   <div class="container-fluid">
     <div class="navbar-header">
-        <a class="navbar-brand" style="color: goldenrod" routerLink="">Gold Srceen</a>
+        <a class="navbar-brand" routerLink="">Gold Screen</a>
     </div>
     <div>
       <ul class="navbar-nav">
         <li class="active">
-          <a class="navbar-brand" style="color: goldenrod" routerLink="">Home</a>
-          <a class="navbar-brand" style="color: goldenrod" routerLink="/films">All Films</a>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signInModal"
-          (click)="_openModal(template)">
-            Sign in
-          </button>
+          <a class="navbar-brand" routerLink="">Home</a>
+          <a class="navbar-brand" routerLink="/films">All Films</a>
+          <a class="example_d" rel="nofollow noopener" (click)="_openSignInModal(SignIn)">
+              Sign In
+          </a>
         </li>
       </ul>
     </div>
@@ -19,41 +18,40 @@
 </nav>
 
 
-<ng-template #template>
+<ng-template #SignIn>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Sign In</h4>
     <button type="button" class="close pull-right"
-            aria-label="Close" (click)="_closeModal()">
+            aria-label="Close" (click)="_closeSignInModal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="form-group">
       <label>login</label>
-      <input class="form-control" name="login" [(ngModel)]="editableBa.name" #name="ngModel" required/>
-      <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
+      <input class="form-control" name="login" [(ngModel)]="editableUs.login" #login="ngModel" required/>
+      <div [hidden]="login.valid || login.untouched" class="alert alert-danger">
         Pls set login
       </div>
     </div>
     <div class="form-group">
       <label>password</label>
-      <input class="form-control" name="description" [(ngModel)]="editableBa.description" #description="ngModel" required/>
-      <div [hidden]="description.valid || description.untouched" class="alert alert-danger">
+      <input class="form-control" name="password" [(ngModel)]="editableUs.password" #password="ngModel" required/>
+      <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
         Pls set password
       </div>
     </div>
-
+    <div class="form-group">Text {{exceptionText}}</div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="_addFilm(name, description)"
-            [disabled]="name.invalid || description.invalid">{{editMode ? "Save": "Create"}}
+    <button type="button" class="btn btn-default" (click)="_login()"
+            [disabled]="login.invalid || password.invalid">Sing in
     </button>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationModal"
             (click)="_openRegistrationModal(Registration)">
       Registration
     </button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeModal()">Close</button>
-
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeSignInModal()">Close</button>
   </div>
 </ng-template>
 
@@ -82,25 +80,10 @@
         Pls set password
       </div>
     </div>
-    <div class="form-group">
-      <label>role</label>
-      <input class="form-control" name="role" [(ngModel)]="editableUs.role" #role="ngModel" required/>
-      <div [hidden]="role.valid || role.untouched" class="alert alert-danger">
-        Pls set role
-      </div>
-    </div>
-<!--    <div class="form-group">-->
-<!--      <label>money</label>-->
-<!--      <input class="form-control" name="wallet.money" [(ngModel)]="editableUs.wallet.money" #money="ngModel" required/>-->
-<!--      <div [hidden]="money.valid || money.untouched" class="alert alert-danger">-->
-<!--        Pls set money-->
-<!--      </div>-->
-<!--    </div>-->
-
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="_addUser(login, password, role)"
-            [disabled]="login.invalid || password.invalid || role.invalid">{{editMode ? "Save": "Create"}}
+    <button type="button" class="btn btn-default" (click)="_addUser()"
+            [disabled]="login.invalid || password.invalid">Create
     </button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeRegistrationModal()">Close</button>
   </div>

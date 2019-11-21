@@ -42,5 +42,6 @@ public class FilmServerImpl implements FilmService {
     @Override
     public List<Session> findSessionsByFilmId(Integer filmId){
         return filmRepository.findSessionsByIdFilm(filmId);
+//        return null;
     }
 }

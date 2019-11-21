@@ -1,7 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="80c3610d-2c7d-4d9c-88b2-27d76831ad00" name="Default Changelist" comment="" />
+    <list default="true" id="80c3610d-2c7d-4d9c-88b2-27d76831ad00" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/.idea/dataSources/a3ea40e7-d054-4c04-9a32-3f72e4d6a549.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/.idea/dataSources/a3ea40e7-d054-4c04-9a32-3f72e4d6a549.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/controller/SessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/controller/SessionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/controller/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/controller/TicketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/entity/Film.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/entity/Film.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/entity/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/entity/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/entity/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/entity/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/repository/FilmRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/repository/FilmRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/repository/SessionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/repository/SessionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/service/SessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/service/SessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/service/impl/SessionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/service/impl/SessionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/src/main/java/com/netcracker/edu/backend/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/controller/SessionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/controller/SessionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/controller/TicketController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/controller/TicketController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/entity/Film.class" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/entity/Film.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/entity/Session.class" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/entity/Session.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/entity/Ticket.class" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/entity/Ticket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/repository/SessionRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/repository/SessionRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/service/SessionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/service/SessionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/service/impl/SessionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/../NetcrackerKlisov/target/classes/com/netcracker/edu/backend/service/impl/SessionServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fapi.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/netcracer/edu/fapi/controller/FilmController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/netcracer/edu/fapi/controller/FilmController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/netcracer/edu/fapi/models/Film.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/netcracer/edu/fapi/models/Film.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/netcracer/edu/fapi/service/FilmService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/netcracer/edu/fapi/service/FilmService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/netcracer/edu/fapi/service/impl/FilmServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/netcracer/edu/fapi/service/impl/FilmServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/film-detail/film.detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/film-detail/film.detail.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/film-detail/film.detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/film-detail/film.detail.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/film/film.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/film/film.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/hall/hall.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/hall/hall.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/hall/hall.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/frontend/src/app/modules/hall/hall.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/frontend/src/app/services/hall.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/frontend/src/app/services/hall.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/frontend/src/app/services/session.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/frontend/src/app/services/session.service.ts" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +53,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -24,14 +64,16 @@
     </option>
   </component>
   <component name="ProjectId" id="1SL80Zn8rLJlEDs6jaMZrb7Rzj0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Front" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -87,10 +129,22 @@
       <workItem from="1571331297460" duration="4131000" />
       <workItem from="1571669356978" duration="1568000" />
       <workItem from="1571756781884" duration="3750000" />
+      <workItem from="1573145485621" duration="3722000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

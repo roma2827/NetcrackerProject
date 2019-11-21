@@ -16,12 +16,14 @@ import {Session} from "../models/session";
 @Component({
   selector: "app-hall",
   templateUrl: "./hall.component.html",
+  styleUrls: ["./hall.component.css"]
 })
 export class HallComponent implements OnInit, OnDestroy {
 
   public editTicketMode = false;
   public editableT: Ticket = new Ticket();
   public modalTicketRef: BsModalRef;
+  public film: Film;
   public session: Session;
   public place: Place;
   public places: Place[];
@@ -50,6 +52,13 @@ export class HallComponent implements OnInit, OnDestroy {
       }));
     }
     this._getSessionById(idSession);
+    this._getFilmById(idSession);
+  }
+
+  public _getFilmById(idSession): void {
+    this.subscriptions.push(this.sessionService.getFilmByIdSession(idSession).subscribe(data => {
+      this.film = data;
+    }));
   }
 
   public _getSessionById(idSession): void {
@@ -75,15 +84,15 @@ export class HallComponent implements OnInit, OnDestroy {
   }
 
   // Ticket
-  public _openTicketModal(template: TemplateRef<any>, ticket: Ticket): void {
+  public _openTicketModal(template: TemplateRef<any>): void {
 
-    if (ticket) {
-      this.editTicketMode = true;
-      this.editableT = ticket;
-    } else {
-      this.refreshT();
-      this.editTicketMode = false;
-    }
+    // if (ticket) {
+    //   this.editTicketMode = true;
+    //   this.editableT = ticket;
+    // } else {
+    //   this.refreshT();
+    //   this.editTicketMode = false;
+    // }
 
     this.modalTicketRef = this.modalService.show(template);
   }
@@ -92,7 +101,12 @@ export class HallComponent implements OnInit, OnDestroy {
     this.modalTicketRef.hide();
   }
 
-  public _addTicket(): void {
+  public _addTicket(session: Session, place: Place): void {
+    this.session.film = this.film;
+    this.editableT.place = place;
+    this.editableT.session = session;
+    console.log(this.editableT.place);
+    console.log(this.editableT.session);
     this.subscriptions.push(this.ticketService.saveTicket(this.editableT).subscribe(() => {
       this._updateHall();
       this.refreshT();

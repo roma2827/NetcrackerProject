@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -24,7 +25,7 @@ public class Film {
 
     @Column
     @NotNull
-    @Size(max = 200)
+    @Size(max = 2000)
     private String description;
 
     @Column
@@ -42,28 +43,32 @@ public class Film {
     //@FutureOrPresent
     private  Integer endData;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "film")
-    @JsonManagedReference
+    @Column
+    private String imj;
+
+    @OneToMany(orphanRemoval=true, fetch = FetchType.EAGER, mappedBy = "film")
+    @JsonIgnore
     private Set<Session> films;
 
     public Film() {
     }
 
-    public Film(@NotNull @Size(max = 50) String name, @NotNull @Size(max = 200) String description, @NotNull Double time, @NotNull Integer startData, @NotNull Integer endData) {
+    public Film(@NotNull @Size(max = 50) String name, @NotNull @Size(max = 2000) String description, @NotNull Double time, @NotNull Integer startData, @NotNull Integer endData, String imj, Set<Session> films) {
         this.name = name;
         this.description = description;
         this.time = time;
         this.startData = startData;
         this.endData = endData;
+        this.imj = imj;
+        this.films = films;
     }
 
-    public Film(@NotNull @Size(max = 50) String name, @NotNull @Size(max = 200) String description, @NotNull Double time, @NotNull Integer startData, @NotNull Integer endData, Set<Session> films) {
-        this.name = name;
-        this.description = description;
-        this.time = time;
-        this.startData = startData;
-        this.endData = endData;
-        this.films = films;
+    public String getImj() {
+        return imj;
+    }
+
+    public void setImj(String imj) {
+        this.imj = imj;
     }
 
     public Set<Session> getFilms() {

@@ -1,34 +1,133 @@
-<!--<div class="container-fluid">-->
-<!--  <h1 class="text-center" style="color: goldenrod">Hall</h1>-->
-<!--  <div class="row">-->
-<!--    <div class="">-->
-<!--      <div><span>Id: </span>{{hall.idHall}}</div>-->
-<!--      <div><span>Name: </span>{{hall.name}}</div>-->
-<!--      <div><span>Row: </span>{{hall.nRow}}</div>-->
-<!--      <div><span>Seat: </span>{{hall.nSeat}}</div>-->
-<!--      <div><span>address: </span>{{hall.cinema.address}}</div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-
-<div class="container">
-  <h1 class="text-center" style="color: goldenrod">Please pick place</h1>
-  <hr align="center" width="90%" size="50" color="black"/>
-  <h4 class="text-center" style="color: goldenrod">screen</h4>
-  <div class="row"><h5>1</h5>
-    <div class="" *ngFor="let place of places">
-      <div class="col-sm-4">
-        <button type="button" *ngIf="place.isFree == 'true'" class="btn btn-success" (click)="getPlaceById(place.idPlace)" (click)="_openTicketModal(Ticket)">
-          <div>{{place.seat}}</div>
-         </button>
-        <button type="button" *ngIf="place.isFree == 'false'" class="btn btn-danger">
-          <div>{{place.seat}}</div>
-        </button>
+<div class="container hall">
+  <div class="container text__hall">
+    Please pick place
+  </div>
+  <hr align="center" width="100%" size="3px" color="black"/>
+  <div class="text-center screen">screen</div>
+  <div class="container places">
+    <div class="place" *ngFor="let place of places">
+      <div *ngIf="place.isFree == 'true'">
+        <a class="place__item_free" (click)="getPlaceById(place.idPlace)" (click)="_openTicketModal(Ticket)">
+          <img src="./src/assets/imj/chair_free.svg" height="30">
+        </a>
+      </div>
+      <div *ngIf="place.isFree == 'false'">
+        <a class="place__item_not_free">
+          <img src="./src/assets/imj/chair_not_free.svg" height="30">
+        </a>
       </div>
     </div>
   </div>
+  <div class="container hall__description">
+    <div class="free_or_not_free_desc">
+      <div class="free_desc">
+        <img src="./src/assets/imj/chair_free.svg" height="30"> free
+      </div>
+      <div class="not_free_desc">
+        <img src="./src/assets/imj/chair_not_free.svg" height="30"> reserved
+      </div>
+    </div>
+    <hr align="center" width="100%" size="3px" color="black"/>
+    <div class="container type__place">
+      <div class="place__type__imj">
+        <img src="./src/assets/imj/chair_free.svg" height="30">
+      </div>
+      <div class="place__desc">
+        Standard
+        <div class="place__desc__text">
+          Single comfortable wide chair with cup holder.
+        </div>
+      </div>
+      <div class="place__price">
+        7 BYN
+      </div>
+    </div>
+    <hr align="center" width="100%" size="3px" color="black"/>
+    <div class="container hall__desc__title">
+      Ticket sales online stops 10 minutes before the start of the session, then tickets can be purchased at the box office.
+    </div>
+    <ol class="hall__desc__text">
+      <li>
+        Children's ticket - a ticket for children under 6 years old inclusively for films 0 +, 6 +. The age of the child is determined visually by the cinema employee. In case of doubt about the age of the child, the cinema employee is entitled to demand the presentation of a document certifying the age of the child.
+      </li>
+      <li>
+        A pension ticket is available for purchase to pensioners and people with disabilities (I and II groups) both at the box office of the cinema and online. At the entrance to the hall, the ticket must be presented to the cinema employee together with a pension certificate and / or a certificate of a disabled person, respectively.
+      </li>
+      <li>
+        Drinking alcohol and smoking in the halls of Golden Screen is strictly prohibited!
+      </li>
+      <li>
+        A huge request in the halls of Gold Screen not to litter.
+      </li>
+    </ol>
+  </div>
 </div>
+
+<!--<div class="container">-->
+<!--  <h1 class="text-center" style="color: goldenrod">Please pick place</h1>-->
+<!--  <hr align="center" width="90%" size="50" color="black"/>-->
+<!--  <h4 class="text-center" style="color: goldenrod">screen</h4>-->
+<!--  <div class="row"><h5>1</h5>-->
+<!--    <div class="" *ngFor="let place of places">-->
+<!--      <div class="col-sm-4" *ngIf="place.row == 1">-->
+<!--        <button type="button" *ngIf="place.isFree == 'true'" class="btn btn-success" (click)="getPlaceById(place.idPlace)" (click)="_openTicketModal(Ticket)">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--         </button>-->
+<!--        <button type="button" *ngIf="place.isFree == 'false'" class="btn btn-danger">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="row"><h5>2</h5>-->
+<!--    <div class="" *ngFor="let place of places">-->
+<!--      <div class="col-sm-4" *ngIf="place.row == 2">-->
+<!--        <button type="button" *ngIf="place.isFree == 'true'" class="btn btn-success" (click)="getPlaceById(place.idPlace)" (click)="_openTicketModal(Ticket)">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--        </button>-->
+<!--        <button type="button" *ngIf="place.isFree == 'false'" class="btn btn-danger">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="row"><h5>3</h5>-->
+<!--    <div class="" *ngFor="let place of places">-->
+<!--      <div class="col-sm-4" *ngIf="place.row == 3">-->
+<!--        <button type="button" *ngIf="place.isFree == 'true'" class="btn btn-success" (click)="getPlaceById(place.idPlace)" (click)="_openTicketModal(Ticket)">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--        </button>-->
+<!--        <button type="button" *ngIf="place.isFree == 'false'" class="btn btn-danger">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="row"><h5>4</h5>-->
+<!--    <div class="" *ngFor="let place of places">-->
+<!--      <div class="col-sm-4" *ngIf="place.row == 4">-->
+<!--        <button type="button" *ngIf="place.isFree == 'true'" class="btn btn-success" (click)="getPlaceById(place.idPlace)" (click)="_openTicketModal(Ticket)">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--        </button>-->
+<!--        <button type="button" *ngIf="place.isFree == 'false'" class="btn btn-danger">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="row"><h5>5</h5>-->
+<!--    <div class="" *ngFor="let place of places">-->
+<!--      <div class="col-sm-4" *ngIf="place.row == 5">-->
+<!--        <button type="button" *ngIf="place.isFree == 'true'" class="btn btn-success" (click)="getPlaceById(place.idPlace)" (click)="_openTicketModal(Ticket)">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--        </button>-->
+<!--        <button type="button" *ngIf="place.isFree == 'false'" class="btn btn-danger">-->
+<!--          <div>{{place.seat}}</div>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <!--Ticket-->
 <ng-template #Ticket>
@@ -57,7 +156,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="updateIsFree(place.idPlace)" (click)="_addTicket(place.idPlace, session.idSession)">{{editTicketMode ? "Save": "Buy"}}
+    <button type="button" class="btn btn-default"  (click)="_addTicket(session, place)" (click)="updateIsFree(place.idPlace)">Buy
 <!--            [disabled]="place.invalid || session.invalid">{{editTicketMode ? "Save": "Create"}}-->
     </button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeTicketModal()">Close</button>

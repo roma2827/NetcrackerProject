@@ -16,4 +16,6 @@ public interface FilmRepository extends CrudRepository<Film, Integer> {
 
     @Query("select f.films from Film f where f.filmId = :filmId")
     List<Session> findSessionsByIdFilm(@Param("filmId") Integer filmId);
+
+
 }

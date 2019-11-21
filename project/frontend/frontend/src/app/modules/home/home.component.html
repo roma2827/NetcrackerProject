@@ -1,25 +1,107 @@
-<div class="container-fluid" style="background-color: gray">
-  <h1 class="text-center" style="color: goldenrod">Top Films</h1>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-4" style="background-image: url('https://upload.wikimedia.org/wikipedia/ru/6/6f/%D0%94%D0%B6%D0%BE%D0%BA%D0%B5%D1%80_%28%D1%84%D0%B8%D0%BB%D1%8C%D0%BC_%D0%A2%D0%BE%D0%B4%D0%B4%D0%B0_%D0%A4%D0%B8%D0%BB%D0%BB%D0%B8%D0%BF%D1%81%D0%B0%29.jpg')">
-      <a class="navbar-brand" style="color: goldenrod" *ngFor="let film of films" routerLink="/detail/{{film.filmId}}">
-        <h3 *ngIf="film.filmId == 1">
-        {{film.name}}</h3>
-      </a>
-    </div>
-
-    <div class="col-sm-4">
-      <a *ngFor="let film of films" routerLink="/detail/{{film.filmId}}">
-        <h3 *ngIf="film.filmId == 3">{{film.name}}</h3>
-      </a>
-    </div>
-
-    <div class="col-sm-4">
-        <a *ngFor="let film of films" routerLink="/detail/{{film.filmId}}">
-          <h3 *ngIf="film.filmId == 5">{{film.name}}</h3>
-        </a>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="./src/assets/imj/imj2.jpg" alt="First slide">
+      <div class="carousel-caption d-none d-md-block">
+        <div class="film__name">
+          <div>{{film.name}}</div>
+        </div>
+        <div class="button_cont" align="center"><a class="buy-ticket-button-on-home" routerLink="/detail/{{film.filmId}}" rel="nofollow noopener">
+          Buy Ticket
+        </a></div>
       </div>
+    </div>
+<!--    <div class="carousel-item" *ngFor="let filmObj of films.slice(1)">-->
+<!--      <img class="d-block w-100" src="{{images[0]}}" alt="First slide">-->
+<!--      <div class="carousel-caption d-none d-md-block">-->
+<!--        <div class="film__name">-->
+<!--          <div>{{filmObj.name}}</div>-->
+<!--        </div>-->
+<!--        <div class="button_cont" align="center"><a class="buy-ticket-button-on-home" routerLink="/detail/{{filmObj.filmId}}" rel="nofollow noopener">-->
+<!--          Buy Ticket-->
+<!--        </a></div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./src/assets/imj/imj3.jpg" alt="Second slide">
+      <div class="carousel-caption d-none d-md-block">
+        <div class="film__name">
+          {{films[1].name}}
+        </div>
+        <div class="button_cont" align="center"><a class="buy-ticket-button-on-home" routerLink="/detail/{{films[1].filmId}}" rel="nofollow noopener">
+          Buy Ticket
+        </a></div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="./src/assets/imj/imj4.jpg" alt="Third slide">
+      <div class="carousel-caption d-none d-md-block">
+        <div class="film__name">
+          {{films[2].name}}
+        </div>
+        <div class="button_cont" align="center"><a class="buy-ticket-button-on-home" routerLink="/detail/{{films[2].filmId}}" rel="nofollow noopener">
+          Buy Ticket
+        </a></div>
+      </div>
+    </div>
   </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
+
+<!--<script>$(".carousel").carousel()</script>-->
+
+<!--Footer-->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__inner">
+      <div class="footer__block">
+        <h4 class="footer__block__title">Location cinemas</h4>
+        <address class="footer__address" *ngFor="let cinema of cinemas">
+          <div>{{cinema.name}}  {{cinema.address}}, Minsk, Belarus</div>
+        </address>
+      </div>
+
+      <div class="footer__block">
+        <h4 class="footer__block__title">social</h4>
+        <div class="social">
+          <a class="social__item" href="#" target="_blank">
+            <img src="./src/assets/imj/vk.svg" height="18">
+          </a>
+          <a class="social__item" href="#" target="_blank">
+            <img src="./src/assets/imj/github.svg" height="18">
+          </a>
+          <a class="social__item" href="#" target="_blank">
+            <img src="./src/assets/imj/instagram.svg" height="18">
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__block">
+        <h4 class="footer__block__title">about</h4>
+        <div class="footer__text">
+          <p>Gold Screen - the first in Minsk network of modern multiplexes located in the best places of our capital.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer__contact">
+    <div class="contact">
+      <div class="social__item__phone" href="#" target="_blank">
+        <img src="./src/assets/imj/phone-call.svg" height="18">
+         375 (25) 992-86-02
+      </div>
+    </div>
+  </div>
+</footer>

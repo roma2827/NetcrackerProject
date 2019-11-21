@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.service.impl;
 
 import com.netcracker.edu.backend.entity.Cinema;
+import com.netcracker.edu.backend.entity.Hall;
 import com.netcracker.edu.backend.repository.CinemaRepository;
 import com.netcracker.edu.backend.service.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,10 @@ public class CinemaServiceImpl implements CinemaService {
     @Override
     public Cinema findByIdCinema(Integer idCinema){
         return cinemaRepository.findByIdCinema(idCinema);
+    }
+
+    @Override
+    public List<Hall> findHallsByIdCinema(Integer idCinema) {
+        return cinemaRepository.findHallsByIdCinema(idCinema);
     }
 }

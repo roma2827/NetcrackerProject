@@ -7,6 +7,7 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 @Component({
   selector: 'app-film',
   templateUrl: './film.component.html',
+  styleUrls: ["./film.component.css"]
 })
 export class FilmComponent implements OnInit, OnDestroy {
 
