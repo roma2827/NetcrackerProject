@@ -14,7 +14,7 @@ export class PlaceService {
 
   // Ajax request for billing account data
   getPlaces(): Observable<Place[]> {
-    return this.http.get<Place[]>('/api/place')
+    return this.http.get<Place[]>('/api/place');
   }
 
   savePlace(place: Place): Observable<Place> {

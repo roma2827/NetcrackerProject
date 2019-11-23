@@ -28,6 +28,17 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
+<!--      <div style="display: flex">-->
+<!--        <button [ngClass]="{'button_active':_currentNumber === 0}" (click)="_onChangeTab(0)">Tab 1</button>-->
+<!--        <button [ngClass]="{'button_active':_currentNumber === 1}" (click)="_onChangeTab(1)">Tab 2</button>-->
+<!--      </div>-->
+<!--      <div *ngIf="_currentNumber === 0">-->
+<!--        Tab content 1-->
+<!--      </div>-->
+<!--      <div *ngIf="_currentNumber === 1">-->
+<!--        Tab content 2-->
+<!--      </div>-->
+
       <label>login</label>
       <input class="form-control" name="login" [(ngModel)]="editableUs.login" #login="ngModel" required/>
       <div [hidden]="login.valid || login.untouched" class="alert alert-danger">

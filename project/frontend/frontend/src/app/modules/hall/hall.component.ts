@@ -21,6 +21,7 @@ import {Session} from "../models/session";
 export class HallComponent implements OnInit, OnDestroy {
 
   public editTicketMode = false;
+
   public editableT: Ticket = new Ticket();
   public modalTicketRef: BsModalRef;
   public film: Film;

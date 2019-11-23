@@ -3,15 +3,17 @@ import {HeaderComponent} from "./components/header.component";
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {UserService} from "../../services/user.service";
+import {BrowserModule} from "@angular/platform-browser";
 
 
 @NgModule({
   declarations: [
-    HeaderComponent,
+    HeaderComponent
   ],
   imports: [
     RouterModule,
-    FormsModule
+    FormsModule,
+    BrowserModule
   ],
   providers: [UserService],
   exports: [HeaderComponent]

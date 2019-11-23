@@ -25,7 +25,7 @@ public class TicketController {
 
     private Double price;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Ticket> getAllTicket(){
         return ticketService.findAll();
     }

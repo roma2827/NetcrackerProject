@@ -28,7 +28,7 @@ public class FilmController {
         return ResponseEntity.ok(film);
     }
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Film> getFilmService(){
         return filmService.findAll();
     }
@@ -38,7 +38,7 @@ public class FilmController {
         return filmService.saveFilm(film);
     }
 
-    @RequestMapping(value = "/delete/{filmId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{filmId}", method = RequestMethod.DELETE)
     public void deleteFilm(@PathVariable(name = "filmId") Integer filmId){
         filmService.deleteFilm(filmId);
     }

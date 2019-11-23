@@ -13,6 +13,8 @@ import {UserService} from "../../../services/user.service";
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  public user: User;
+  public _currentNumber: number = 0;
   private subscriptions: Subscription[] = [];
   public editableUs: User = new User();
   public modalRegistrationRef: BsModalRef;
@@ -39,6 +41,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
+  _onChangeTab(numberTab: number) {
+    this._currentNumber = numberTab;
+  }
+
   // Registration
   public _openRegistrationModal(template: TemplateRef<any>): void {
     this.modalRegistrationRef = this.modalService.show(template);
@@ -58,8 +64,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public _login(): void {
     this.subscriptions.push(this.userService.login(this.editableUs).subscribe(data => {
       this.exceptionText = data;
+      this.user = this.editableUs;
       this.refreshUs();
       this._closeSignInModal();
+    },(err) => {
+
     }));
   }
 

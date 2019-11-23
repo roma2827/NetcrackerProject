@@ -15,7 +15,7 @@ public class PlaceController {
     @Autowired
     private PlaceService placeService;
 
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public List<Place> getAllPlace(){
         return placeService.findAll();
     }

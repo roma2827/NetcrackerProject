@@ -1,7 +1,12 @@
 package com.netcracer.edu.fapi.controller;
 
 import com.netcracer.edu.fapi.models.Film;
+import com.netcracer.edu.fapi.models.Hall;
+import com.netcracer.edu.fapi.models.Place;
 import com.netcracer.edu.fapi.models.Session;
+import com.netcracer.edu.fapi.service.FilmService;
+import com.netcracer.edu.fapi.service.HallService;
+import com.netcracer.edu.fapi.service.PlaceService;
 import com.netcracer.edu.fapi.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +20,6 @@ public class SessionController {
 
     @Autowired
     private SessionService sessionService;
-
-    //    @Autowired
-//    private PlaceService placeService;
 
     @RequestMapping(value = "/time/{time}", method = RequestMethod.GET)
     public ResponseEntity<Session> getSessionByTime(@PathVariable(name = "time") Double time){
@@ -39,12 +41,7 @@ public class SessionController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Session saveSession(@RequestBody Session session){
-//        Session newSession = sessionService.save(session);
-//        Place place = new Place();
-//        place.setSession(newSession);
-//        placeService.save(place);
         return sessionService.save(session);
-//        return sessionService.save(newSession);
     }
 
     @RequestMapping(value = "/{idSession}", method = RequestMethod.DELETE)
@@ -52,17 +49,17 @@ public class SessionController {
         sessionService.delete(idSession);
     }
 
-//    @RequestMapping(value = "/hall/{idSession}", method = RequestMethod.GET)
-//    public ResponseEntity<Hall> getHall(@PathVariable(name = "idSession") Integer idSession){
-//        Hall hall = sessionService.findHall(idSession);
-//        return ResponseEntity.ok(hall);
-//    }
+    @RequestMapping(value = "/hall/{idSession}", method = RequestMethod.GET)
+    public ResponseEntity<Hall> getHall(@PathVariable(name = "idSession") Integer idSession){
+        Hall hall = sessionService.findHall(idSession);
+        return ResponseEntity.ok(hall);
+    }
 
-//    @RequestMapping(value = "/place/{idSession}", method = RequestMethod.GET)
-//    public ResponseEntity<List<Place>> getPlaces(@PathVariable(name = "idSession") Integer idSession){
-//        List<Place> places = sessionService.findSessionPlace(idSession);
-//        return ResponseEntity.ok(places);
-//    }
+    @RequestMapping(value = "/place/{idSession}", method = RequestMethod.GET)
+    public ResponseEntity<List<Place>> getPlaces(@PathVariable(name = "idSession") Integer idSession){
+        List<Place> places = sessionService.findSessionPlace(idSession);
+        return ResponseEntity.ok(places);
+    }
 
     @RequestMapping(value = "/id/{idSession}", method = RequestMethod.GET)
     public ResponseEntity<Session> getSessionByIdSession(@PathVariable(name = "idSession") Integer idSession){

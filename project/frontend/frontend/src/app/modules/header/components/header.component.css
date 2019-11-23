@@ -25,4 +25,9 @@
   border-radius: 50px;
   border-color: #20bf6b !important;
   transition: all 0.3s ease 0s;
+  cursor: pointer;
 }
+
+/*.button_active {*/
+/*  background-color: blue;*/
+/*}*/

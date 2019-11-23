@@ -37,11 +37,11 @@ export class UserService {
     return this.http.get<Ticket[]>('/api/user/ticket/' + idUser);
   }
 
-  getTicketByLogin(login: String): Observable<Ticket[]> {
+  getTicketByLogin(login: string): Observable<Ticket[]> {
     return this.http.get<Ticket[]>("/api/user/ticketByLogin/" + login);
   }
 
-  login(user: User): Observable<String> {
-    return this.http.post<String>("/api/user/login", user);
+  login(user: User): Observable<string> {
+    return this.http.post<string>("/api/user/login", user);
   }
 }

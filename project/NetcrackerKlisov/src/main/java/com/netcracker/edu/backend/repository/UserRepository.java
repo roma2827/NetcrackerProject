@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
     User findByLogin(String login);
+    User findByIdUser(Integer idUser);
 
     @Query("select u.tickets from User u where u.idUser = :idUser")
     List<Ticket> findTicketByIdUser(@Param("idUser") Integer idUser);
