@@ -3,6 +3,7 @@ import {Film} from './models/film'
 import {Subscription} from 'rxjs';
 import {FilmService} from '../../services/film.service'
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-film',
@@ -11,17 +12,16 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 })
 export class FilmComponent implements OnInit, OnDestroy {
 
-  public editMode = false;
-
   public films: Film[];
   private subscriptions: Subscription[] = [];
-
-  public editableBa: Film = new Film();
+  public editableF: Film = new Film();
   public modalRef: BsModalRef;
 
-  constructor(private modalService: BsModalService,
-              private filmService: FilmService) {
-  }
+  constructor(
+    private storageService: StorageService,
+    private modalService: BsModalService,
+    private filmService: FilmService
+  ) {}
 
 
   ngOnDestroy(): void {
@@ -37,22 +37,14 @@ export class FilmComponent implements OnInit, OnDestroy {
     this.modalRef.hide();
   }
 
-  public _openModal(template: TemplateRef<any>, film: Film): void {
-    if (film) {
-      this.editMode = true;
-      this.editableBa = film;
-    } else {
-      this.refreshBa();
-      this.editMode = false;
-    }
-
+  public _openModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template);
   }
 
   public _addFilm(): void {
-    this.subscriptions.push(this.filmService.saveFilm(this.editableBa).subscribe(() => {
+    this.subscriptions.push(this.filmService.saveFilm(this.editableF).subscribe(() => {
       this._updateFilms();
-      this.refreshBa();
+      this.refreshF();
       this._closeModal();
     }));
   }
@@ -61,8 +53,8 @@ export class FilmComponent implements OnInit, OnDestroy {
     this.loadFilms();
   }
 
-  private refreshBa(): void {
-    this.editableBa = new Film();
+  private refreshF(): void {
+    this.editableF = new Film();
   }
 
   private loadFilms(): void {
@@ -70,6 +62,4 @@ export class FilmComponent implements OnInit, OnDestroy {
       this.films = data as Film[];
     }));
   }
-
-
 }

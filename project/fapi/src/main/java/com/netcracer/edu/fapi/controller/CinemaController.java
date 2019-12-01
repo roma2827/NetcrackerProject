@@ -4,6 +4,7 @@ import com.netcracer.edu.fapi.models.Cinema;
 import com.netcracer.edu.fapi.service.CinemaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,11 +26,13 @@ public class CinemaController {
         return cinemaService.findAll();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     public Cinema saveCinema(@RequestBody Cinema cinema){
         return cinemaService.save(cinema);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/delete/{idCinema}", method = RequestMethod.DELETE)
     public void deleteCinema(@PathVariable(name = "idCinema") Integer idCinema){
         cinemaService.delete(idCinema);

@@ -4,6 +4,7 @@ import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {BrowserModule} from "@angular/platform-browser";
+import {StorageService} from "../../services/storage.service";
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import {BrowserModule} from "@angular/platform-browser";
     FormsModule,
     BrowserModule
   ],
-  providers: [UserService],
+  providers: [UserService, StorageService],
   exports: [HeaderComponent]
 })
 export class HeaderModule {}

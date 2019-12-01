@@ -5,7 +5,7 @@ import { TooltipModule } from "ngx-bootstrap/tooltip";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { FormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FilmModule} from './modules/film.module'
 import {RouterModule, Routes} from "@angular/router";
 import {FilmComponent} from './modules/film/film.component'
@@ -17,6 +17,8 @@ import {HallComponent} from "./modules/hall/hall.component";
 import {UserAccountComponent} from "./modules/user-account/user-account.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import $ from "jquery";
+import {UserService} from "./services/user.service";
+import {APIInterceptor} from "./interceptors/api-interceptor";
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -42,7 +44,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     NgbModule
   ],
-  providers: [],
+  providers: [UserService, APIInterceptor, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: APIInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,10 +1,12 @@
 import {Component, OnDestroy, OnInit, TemplateRef} from "@angular/core";
 import {Subscription} from "rxjs/internal/Subscription";
-import {Film} from "../../film/models/film"
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import { FilmService } from "src/app/services/film.service";
 import {User} from "../../models/user";
-import {UserService} from "../../../services/user.service";
+import {AuthToken, UserService} from "../../../services/user.service";
+import {LoginModel} from "../../models/login.model";
+import {StorageService} from "../../../services/storage.service";
+
+
 
 @Component({
   selector: "app-header",
@@ -13,17 +15,21 @@ import {UserService} from "../../../services/user.service";
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  public loginModel: LoginModel = {
+    username: null,
+    password: null
+  };
+  public repeatPassword: string;
   public user: User;
-  public _currentNumber: number = 0;
   private subscriptions: Subscription[] = [];
   public editableUs: User = new User();
   public modalRegistrationRef: BsModalRef;
   public modalSignInRef: BsModalRef;
-  private exceptionText: String;
 
   constructor(
     private  userService: UserService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private storageService: StorageService
   ) {}
 
   ngOnInit() {
@@ -41,8 +47,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  _onChangeTab(numberTab: number) {
-    this._currentNumber = numberTab;
+  public _login(): void {
+    this.userService.generateToken(this.loginModel)
+      .subscribe((authToken: AuthToken) => {
+        if (authToken.token) {
+          this.storageService.setToken(authToken.token);
+          this.userService.getAuthorizedUser()
+            .subscribe((user: User) => {
+              this.storageService.setCurrentUser(user);
+            });
+        }
+      }, (error) => {
+        // if (error.status === 401) {
+        //   this.showCheckYourSetDataAlert = true;
+        // } else {
+        //   alert(error.message);
+        // }
+      });
+    this._closeSignInModal();
+  }
+
+  public logout(): void {
+    this.storageService.clearToken();
+    this.storageService.setCurrentUser(null);
   }
 
   // Registration
@@ -58,17 +85,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.userService.saveUser(this.editableUs).subscribe(() => {
       this.refreshUs();
       this._closeRegistrationModal();
-    }));
-  }
-
-  public _login(): void {
-    this.subscriptions.push(this.userService.login(this.editableUs).subscribe(data => {
-      this.exceptionText = data;
-      this.user = this.editableUs;
-      this.refreshUs();
-      this._closeSignInModal();
-    },(err) => {
-
     }));
   }
 

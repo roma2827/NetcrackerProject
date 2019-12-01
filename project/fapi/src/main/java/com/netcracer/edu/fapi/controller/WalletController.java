@@ -21,6 +21,7 @@ public class WalletController {
         return walletService.findAll();
     }
 
+
     @RequestMapping(method = RequestMethod.POST)
     public Wallet saveUser(@RequestBody Wallet wallet) {
         return walletService.save(wallet);

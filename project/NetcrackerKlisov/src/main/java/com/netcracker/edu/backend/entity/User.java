@@ -1,6 +1,7 @@
 package com.netcracker.edu.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -31,7 +32,7 @@ public class User {
     @Basic
     @Column
     @NotNull
-    @Size(max = 20)
+    @Size(max = 225)
     private String password;
 
     @OneToOne
@@ -42,19 +43,20 @@ public class User {
 //    @JoinColumn(name="id_ticket", unique = true)
 //    private Ticket ticket;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    @JsonIgnore
+    @JsonManagedReference
+//    @JsonIgnore
     private Set<Ticket> tickets;
 
     public User() {
     }
 
-    public User(@NotNull @Size(max = 20) String login, @NotNull @Size(max = 20) String password, Wallet wallet) {
+    public User(@NotNull @Size(max = 20) String login, @NotNull @Size(max = 225) String password, Wallet wallet) {
         this.login = login;
         this.password = password;
         this.wallet = wallet;
     }
 
-    public User(@NotNull @Size(max = 10) String role, @NotNull @Size(max = 20) String login, @NotNull @Size(max = 20) String password, Wallet wallet, Set<Ticket> tickets) {
+    public User(@NotNull @Size(max = 10) String role, @NotNull @Size(max = 20) String login, @NotNull @Size(max = 225) String password, Wallet wallet, Set<Ticket> tickets) {
         this.role = role;
         this.login = login;
         this.password = password;

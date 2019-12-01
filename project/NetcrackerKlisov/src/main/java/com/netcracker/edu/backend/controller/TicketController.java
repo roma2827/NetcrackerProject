@@ -32,7 +32,6 @@ public class TicketController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Ticket saveTicket(@RequestBody Ticket ticket){
-
        return ticketService.save(ticket);
     }
 

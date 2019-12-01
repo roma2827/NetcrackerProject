@@ -32,7 +32,7 @@ export class FilmService {
     return this.http.get<Film>('/api/films/' + name);
   }
 
-  getSessionByFilmId(filmId: number): Observable<Session[]>{
+  getSessionByFilmId(filmId: number): Observable<Session[]> {
     return this.http.get<Session[]>('/api/films/session/' + filmId);
   }
 }

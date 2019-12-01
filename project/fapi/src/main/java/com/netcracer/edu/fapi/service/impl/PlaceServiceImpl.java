@@ -35,11 +35,10 @@ public class PlaceServiceImpl implements PlaceService {
         restTemplate.delete(backendServerUrl + "/api/place/" + idPlace);
     }
 
-//    ПЕРЕПИСАТЬ
     @Override
     public void updatePlaceIsFree(Integer idPlace) {
         RestTemplate restTemplate = new RestTemplate();
-//        restTemplate.postForObject(backendServerUrl + "/api/update-place", idPlace).getBody();
+        restTemplate.postForObject(backendServerUrl + "/api/place/update-place", idPlace, Void.class);
     }
 
     @Override

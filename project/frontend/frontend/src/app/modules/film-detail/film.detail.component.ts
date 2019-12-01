@@ -10,6 +10,7 @@ import {Hall} from "../models/hall";
 import {HallService} from "../../services/hall.service";
 import {CinemaService} from "../../services/cinema.service";
 import {Cinema} from "../models/cinema";
+import {StorageService} from "../../services/storage.service";
 
 
 @Component({
@@ -19,8 +20,6 @@ import {Cinema} from "../models/cinema";
 })
 export class FilmDetailComponent implements OnInit, OnDestroy {
 
-  // public _currentHalls: Hall[];
-  // public _currentCinema: Cinema;
   public cinemas: Cinema[];
   public halls: Hall[];
   public editSessionMode = false;
@@ -30,12 +29,12 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   public modalSessionRef: BsModalRef;
   public modalCinemaRef: BsModalRef;
   public modalHallRef: BsModalRef;
-  // public session: Session;
-  film: Film;
+  public film: Film;
   public sessions: Session[];
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private storageService: StorageService,
     private cinemaService: CinemaService,
     private hallService: HallService,
     private modalService: BsModalService,
@@ -43,8 +42,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     private filmService: FilmService,
     private router: Router,
     private sessionService: SessionService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     const filmId = this.activateRoute.snapshot.params['filmId'];
@@ -62,17 +60,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     }));
   }
 
-  // public _getHallsByIdCinema(idCinema: number): void {
-  //   this.subscriptions.push((this.cinemaService.getHallsByIdCinema(idCinema).subscribe(data => {
-  //     this._currentHalls = data as Hall[];
-  //   })));
-  // }
-  //
-  // public _onChengeCinema(event): void {
-  //   this._currentCinema = event.value;
-  //   this._getHallsByIdCinema(this._currentCinema.idCinema);
-  // }
-
   public _getCinemas(): void {
     this.subscriptions.push(this.cinemaService.getCinemas().subscribe(data => {
       this.cinemas = data as Cinema[];
@@ -86,7 +73,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public _deleteFilm(filmId: number): void {
-    console.log(filmId);
     this.subscriptions.push(this.filmService.deleteFilm(filmId).subscribe(() => {
     }));
   }
@@ -103,15 +89,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   // AddSession
   public _openAddSessionModal(template: TemplateRef<any>): void {
-
-    // if (this.session) {
-    //   this.editSessionMode = true;
-    //   this.editableS = this.session;
-    // } else {
-    //   this.refreshS();
-    //   this.editSessionMode = false;
-    // }
-
     this.modalSessionRef = this.modalService.show(template);
   }
 
@@ -121,7 +98,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
 
   public _addSession(film: Film): void {
     this.editableS.film = film;
-    // this.editableS.hall.name = hal;
     this.subscriptions.push(this.sessionService.saveSession(this.editableS).subscribe(() => {
       this._updateFilmDetail();
       this.refreshS();
@@ -142,8 +118,6 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
 //  AddCinema
-
-
   public _openAddCinemaModal(templateAddCinema: TemplateRef<any>): void {
     this.modalCinemaRef = this.modalService.show(templateAddCinema);
   }
@@ -164,9 +138,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
     this.editableC = new Cinema();
   }
 
-
 //  AddHall
-
   public _openAddHallModal(templateAddHall: TemplateRef<any>): void {
     this.modalHallRef = this.modalService.show(templateAddHall);
   }
@@ -186,5 +158,4 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private refreshH(): void {
     this.editableH = new Hall();
   }
-
 }

@@ -13,7 +13,6 @@ import {Cinema} from "../models/cinema";
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  images = ["./src/assets/imj/imj3.jpg", "./src/assets/imj/imj4.jpg"];
   cinemas: Cinema[];
   film: Film;
   films: Film[] = [];

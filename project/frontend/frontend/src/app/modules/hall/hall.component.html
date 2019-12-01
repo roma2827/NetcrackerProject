@@ -156,7 +156,8 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default"  (click)="_addTicket(session, place)" (click)="updateIsFree(place.idPlace)">Buy
+    <button type="button" class="btn btn-default"  (click)="_addTicket(session, place)" >Buy
+<!--      (click)="updateIsFree(place.idPlace)"-->
 <!--            [disabled]="place.invalid || session.invalid">{{editTicketMode ? "Save": "Create"}}-->
     </button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeTicketModal()">Close</button>

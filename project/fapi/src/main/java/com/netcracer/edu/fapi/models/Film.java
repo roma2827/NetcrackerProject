@@ -8,21 +8,17 @@ public class Film {
     private String name;
     private Double time;
     private String description;
-    private Integer starData;
-    private Integer endData;
     private String imj;
     private Set<Session> films;
 
     public Film() {
     }
 
-    public Film(Integer filmId, String name, Double time, String description, Integer starData, Integer endData, String imj, Set<Session> films) {
+    public Film(Integer filmId, String name, Double time, String description, String imj, Set<Session> films) {
         this.filmId = filmId;
         this.name = name;
         this.time = time;
         this.description = description;
-        this.starData = starData;
-        this.endData = endData;
         this.imj = imj;
         this.films = films;
     }
@@ -73,21 +69,5 @@ public class Film {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getStarData() {
-        return starData;
-    }
-
-    public void setStarData(Integer starData) {
-        this.starData = starData;
-    }
-
-    public Integer getEndData() {
-        return endData;
-    }
-
-    public void setEndData(Integer endData) {
-        this.endData = endData;
     }
 }

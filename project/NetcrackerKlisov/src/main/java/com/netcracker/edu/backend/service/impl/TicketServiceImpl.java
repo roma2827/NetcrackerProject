@@ -26,6 +26,9 @@ public class TicketServiceImpl implements TicketService {
     private SessionService sessionService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -40,10 +43,12 @@ public class TicketServiceImpl implements TicketService {
     public Ticket save(Ticket ticket){
         Place place = placeService.findByIdPlace(ticket.getPlace().getIdPlace());
         Session session = sessionService.findByIdSession(ticket.getSession().getIdSession());
-//        User user = userRepository.findById(ticket.getUser().getIdUser()).get();
-//        Wallet wallet = walletRepository.findById(user.getWallet().getIdWallet()).get();
-//        wallet.setMoney(wallet.getMoney() - ticket.getPlace().getPrice());
-//        walletRepository.save(wallet);
+        User user = userService.findByIdUser(ticket.getUser().getIdUser());
+        placeService.updatePlaceIsFree(place.getIdPlace());
+        Wallet wallet = walletRepository.findById(user.getWallet().getIdWallet()).get();
+        wallet.setMoney(wallet.getMoney() - ticket.getPlace().getPrice());
+        walletRepository.save(wallet);
+        ticket.setUser(user);
         ticket.setSession(session);
         ticket.setPlace(place);
         return ticketRepository.save(ticket);

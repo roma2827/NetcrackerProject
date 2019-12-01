@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -13,13 +14,10 @@ public class Ticket {
     @Column(name = "id_ticket")
     private Integer idTicket;
 
-//    @Column
-//    @NotNull
-//    private Double price;
-
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_user")
-    @JsonIgnore
+    @JsonBackReference
+//    @JsonIgnore
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -54,14 +52,6 @@ public class Ticket {
     public void setIdTicket(Integer idTicket) {
         this.idTicket = idTicket;
     }
-
-//    public Double getPrice() {
-//        return price;
-//    }
-//
-//    public void setPrice(Double price) {
-//        this.price = price;
-//    }
 
     public Session getSession() {
         return session;

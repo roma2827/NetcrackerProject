@@ -10,6 +10,7 @@ import com.netcracer.edu.fapi.service.PlaceService;
 import com.netcracer.edu.fapi.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,11 +40,13 @@ public class SessionController {
         return ResponseEntity.ok(session);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     public Session saveSession(@RequestBody Session session){
         return sessionService.save(session);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{idSession}", method = RequestMethod.DELETE)
     public void deleteSession(@PathVariable(name = "idSession") Integer idSession){
         sessionService.delete(idSession);

@@ -1,14 +1,3 @@
-<!--<div class="container-fluid">-->
-<!--  <h1 class="text-center" style="color: goldenrod">{{film.name}}</h1>-->
-<!--  <div class="h4" style="color: goldenrod" >-->
-<!--    <span>Description </span>-->
-<!--    <div>{{film.description}}</div>-->
-<!--    <div><span>Movie Duration </span><span class="text-left">{{film.time}}</span></div>-->
-<!--    <div><span>Delivery Start Date </span>{{film.startData}}</div>-->
-<!--    <div><span>Delivery End Date </span>{{film.endData}}</div>-->
-<!--    <button type="button" class="btn btn-danger" (click)="_deleteFilm(film.filmId)" routerLink="/films">Delete Film</button>-->
-<!--    </div>-->
-<!--</div>-->
 <div class="container film__detail__main">
   <div class="container film__detail">
     <div class="film__imj">
@@ -18,10 +7,6 @@
       {{film.name}}
     </div>
   </div>
-
-
-<!--<hr align="center" width="90%" size="50" color="black"/>-->
-
   <div class="container session">
     <div class="container show__session__and__line" *ngFor="let session of sessions">
       <hr align="center" width="90%" size="50" color="black"/>
@@ -36,7 +21,11 @@
               {{session.hall.name}}
             </a>
         </div>
-        <button type="buttsn" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>
+        <div *ngIf="storageService.getCurrentUser()">
+          <div *ngIf="storageService.getCurrentUser().role === 'ADMIN'">
+            <button type="buttsn" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -51,42 +40,42 @@
   </div>
 </div>
 
-<!--<div class="container-fluid">-->
-<!--  <h1 class="text-center" style="color: goldenrod">Sessions-->
-<!--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"-->
-<!--            (click)="_openAddSessionModal(sessionTemplate)" (click)="_getHalls()">-->
-<!--      Add Session-->
-<!--    </button>-->
-<!--  </h1>-->
-<!--  <div class="row">-->
-<!--    <div class="" *ngFor="let session of sessions" >-->
-<!--      <div>-->
-<!--        <button type="button" class="btn btn-info" routerLink="/hall/{{session.idSession}}">-->
-<!--        <div><span>Date: </span>{{session.date}}</div>-->
-<!--        <div><span>Time: </span>{{session.time}}</div>-->
-<!--        <div><span>hall: </span>{{session.hall.name}}</div>-->
-<!--        <div><span>cinema: </span>{{session.hall.cinema.name}}</div>-->
-<!--        <div><span>address: </span>{{session.hall.cinema.address}}</div>-->
-<!--      </button>-->
-<!--      </div>-->
-<!--      <button type="button" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 
-
-<!-- <ul style="background-color: gray" class="sessions">
-  <div *ngFor="let session of sessions">
-    <a *ngIf = "film.filmId == session.film.filmId"
-      routerLink="/films">
-        <div><span>Date: </span>{{session.date}}</div>
-        <div><span>Time: </span>{{session.time}}</div>
-        <div><span>hall: </span>{{session.hall.name}}</div>
-        <div><span>cinema: </span>{{session.hall.cinema.name}}</div>
-        <div><span>address: </span>{{session.hall.cinema.address}}</div>
-    </a>
+<div class="container admin" *ngIf="storageService.getCurrentUser()">
+  <div *ngIf="storageService.getCurrentUser().role == 'ADMIN'">
+    <div class="admin__panel__header">
+      admin panel
+    </div>
+    <hr align="center" width="90%" size="50" color="black"/>
+    <div class="admin__panel__body">
+      <div class="admin__button__panel">
+        <a class="admin-button" rel="nofollow noopener" data-toggle="modal" data-target="#addFilmModal"
+           (click)="_deleteFilm(film.filmId)" routerLink="/films">
+          Delete Film
+        </a>
+      </div>
+      <div class="admin__button__panel">
+        <a class="admin-button" rel="nofollow noopener" data-toggle="modal" data-target="#addFilmModal"
+           (click)="_openAddSessionModal(sessionTemplate)" (click)="_getHalls()" (click)="_getCinemas()">
+          Add Session
+        </a>
+      </div>
+      <div class="admin__button__panel">
+        <a class="admin-button" rel="nofollow noopener" data-toggle="modal" data-target="#addFilmModal"
+           (click)="_openAddCinemaModal(cinemaTemplate)">
+          Add Cinema
+        </a>
+      </div>
+      <div class="admin__button__panel">
+        <a class="admin-button" rel="nofollow noopener" data-toggle="modal" data-target="#addFilmModal"
+           (click)="_openAddHallModal(hallTemplate)" (click)="_getCinemas()">
+          Add Hall
+        </a>
+      </div>
+    </div>
   </div>
-</ul> -->
+</div>
+
 
 
 <!--ADD SESSION-->
@@ -113,14 +102,6 @@
           Pls set time
         </div>
       </div>
-<!--      <div class="form-group">-->
-<!--        <label>Cinema</label>-->
-<!--        <select class="form-control" name="cinema" [(ngModel)]="_currentCinema" (change)="_onChengeCinema($event)">-->
-<!--          <option  *ngFor="let cinema of cinemas" [ngValue]="cinema">-->
-<!--            {{cinema.name}}-->
-<!--          </option>-->
-<!--        </select>-->
-<!--      </div>-->
       <div class="form-group">
         <label>Halls</label>
         <select class="form-control" name="hall" [(ngModel)]="editableS.hall">
@@ -230,17 +211,17 @@
 
 
 <!--debilnie knopki-->
-<button type="button" class="btn btn-danger" (click)="_deleteFilm(film.filmId)" routerLink="/films">Delete Film</button>
-<button type="button" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
-  (click)="_openAddSessionModal(sessionTemplate)" (click)="_getHalls()" (click)="_getCinemas()">
-  Add Session
-</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCinemaModal"
-        (click)="_openAddCinemaModal(cinemaTemplate)">
-  Add Cinema
-</button>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createHallModal"
-        (click)="_openAddHallModal(hallTemplate)" (click)="_getCinemas()">
-  Add Hall
-</button>
+<!--<button type="button" class="btn btn-danger" (click)="_deleteFilm(film.filmId)" routerLink="/films">Delete Film</button>-->
+<!--<button type="button" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>-->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"-->
+<!--  (click)="_openAddSessionModal(sessionTemplate)" (click)="_getHalls()" (click)="_getCinemas()">-->
+<!--  Add Session-->
+<!--</button>-->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCinemaModal"-->
+<!--        (click)="_openAddCinemaModal(cinemaTemplate)">-->
+<!--  Add Cinema-->
+<!--</button>-->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createHallModal"-->
+<!--        (click)="_openAddHallModal(hallTemplate)" (click)="_getCinemas()">-->
+<!--  Add Hall-->
+<!--</button>-->

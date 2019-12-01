@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { User } from "../modules/models/user";
 import {Ticket} from "../modules/models/ticket";
+import {LoginMessage} from "../modules/models/login";
+import {LoginModel} from "../modules/models/login.model";
 
 
 @Injectable()
@@ -11,6 +13,10 @@ export class UserService {
 
   constructor(private http: HttpClient) {
   }
+
+  // public generateToken(login: LoginModel): Observable<AuthToken> {
+  //   return this.http.post<AuthToken>("/api/token/generate-token", login);
+  // }
 
   // Ajax request for billing account data
   getUsers(): Observable<User[]> {
@@ -41,7 +47,19 @@ export class UserService {
     return this.http.get<Ticket[]>("/api/user/ticketByLogin/" + login);
   }
 
-  login(user: User): Observable<string> {
-    return this.http.post<string>("/api/user/login", user);
+  login(user: User): Observable<LoginMessage> {
+    return this.http.post<LoginMessage>("/api/user/login", user);
   }
+
+  public generateToken(login: LoginModel): Observable<AuthToken> {
+    return this.http.post<AuthToken>("/api/token/generate-token", login);
+  }
+
+  public getAuthorizedUser(): Observable<User> {
+    return this.http.get<User>("/api/user/current");
+  }
+}
+
+export interface AuthToken {
+  readonly token: string;
 }

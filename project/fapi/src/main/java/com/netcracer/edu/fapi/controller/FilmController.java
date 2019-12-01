@@ -5,6 +5,7 @@ import com.netcracer.edu.fapi.models.Session;
 import com.netcracer.edu.fapi.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,11 +34,13 @@ public class FilmController {
         return filmService.findAll();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     public Film saveFilm(@RequestBody Film film){
         return filmService.saveFilm(film);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{filmId}", method = RequestMethod.DELETE)
     public void deleteFilm(@PathVariable(name = "filmId") Integer filmId){
         filmService.deleteFilm(filmId);

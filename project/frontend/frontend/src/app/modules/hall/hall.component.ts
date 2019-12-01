@@ -12,6 +12,7 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Ticket} from "../models/ticket";
 import {TicketService} from "../../services/ticket.service";
 import {Session} from "../models/session";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: "app-hall",
@@ -32,6 +33,7 @@ export class HallComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private storageService: StorageService,
     private ticketService: TicketService,
     private modalService: BsModalService,
     private placeService: PlaceService,
@@ -104,11 +106,10 @@ export class HallComponent implements OnInit, OnDestroy {
 
   public _addTicket(session: Session, place: Place): void {
     this.session.film = this.film;
+    this.editableT.user = this.storageService.getCurrentUser();
     this.editableT.place = place;
     this.editableT.session = session;
-    console.log(this.editableT.place);
-    console.log(this.editableT.session);
-    this.subscriptions.push(this.ticketService.saveTicket(this.editableT).subscribe(() => {
+      this.subscriptions.push(this.ticketService.saveTicket(this.editableT).subscribe(() => {
       this._updateHall();
       this.refreshT();
       this._closeTicketModal();

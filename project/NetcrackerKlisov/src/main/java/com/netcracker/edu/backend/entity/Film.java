@@ -33,16 +33,6 @@ public class Film {
     //@FutureOrPresent
     private Double time;
 
-    @Column(name = "start_data")
-    @NotNull
-    //@FutureOrPresent
-    private Integer startData;
-
-    @Column(name = "end_data")
-    @NotNull
-    //@FutureOrPresent
-    private  Integer endData;
-
     @Column
     private String imj;
 
@@ -53,12 +43,10 @@ public class Film {
     public Film() {
     }
 
-    public Film(@NotNull @Size(max = 50) String name, @NotNull @Size(max = 2000) String description, @NotNull Double time, @NotNull Integer startData, @NotNull Integer endData, String imj, Set<Session> films) {
+    public Film(@NotNull @Size(max = 50) String name, @NotNull @Size(max = 2000) String description, @NotNull Double time, String imj, Set<Session> films) {
         this.name = name;
         this.description = description;
         this.time = time;
-        this.startData = startData;
-        this.endData = endData;
         this.imj = imj;
         this.films = films;
     }
@@ -109,21 +97,5 @@ public class Film {
 
     public void setTime(Double time) {
         this.time = time;
-    }
-
-    public Integer getStartData() {
-        return startData;
-    }
-
-    public void setStartData(Integer startData) {
-        this.startData = startData;
-    }
-
-    public Integer getEndData() {
-        return endData;
-    }
-
-    public void setEndData(Integer endData) {
-        this.endData = endData;
     }
 }

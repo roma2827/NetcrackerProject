@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.controller;
 
+import com.netcracker.edu.backend.entity.LoginMessage;
 import com.netcracker.edu.backend.entity.Ticket;
 import com.netcracker.edu.backend.entity.User;
 import com.netcracker.edu.backend.entity.Wallet;
@@ -8,6 +9,7 @@ import com.netcracker.edu.backend.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 
@@ -66,7 +68,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody User user) {
-        return userService.login(user);
+    public LoginMessage login(@RequestBody User user) {
+        LoginMessage loginMessage = userService.login(user);
+        return loginMessage;
     }
 }

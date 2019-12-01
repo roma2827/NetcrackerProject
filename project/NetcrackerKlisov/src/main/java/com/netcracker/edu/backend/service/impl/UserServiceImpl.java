@@ -1,5 +1,6 @@
 package com.netcracker.edu.backend.service.impl;
 
+import com.netcracker.edu.backend.entity.LoginMessage;
 import com.netcracker.edu.backend.entity.Ticket;
 import com.netcracker.edu.backend.entity.User;
 import com.netcracker.edu.backend.entity.Wallet;
@@ -32,6 +33,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByIdUser(Integer idUser) {
+        return userRepository.findByIdUser(idUser);
+    }
+
+    @Override
     public User save(User user) {
         user.setRole("USER");
         return userRepository.save(user);
@@ -59,14 +65,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(User user) {
+    public LoginMessage login(User user) {
         User databaseUser = userRepository.findByLogin(user.getLogin());
+        LoginMessage loginMessage = new LoginMessage();
         if (databaseUser == null) {
-            return INCORRECT_LOGIN_EXCEPTION;
+            loginMessage.setLoginMessage(INCORRECT_LOGIN_EXCEPTION);
+            return loginMessage;
         }
         if (!user.getPassword().equals(databaseUser.getPassword())) {
-            return INCORRECT_PASSWORD_EXCEPTION;
+            loginMessage.setLoginMessage(INCORRECT_PASSWORD_EXCEPTION);
+            return loginMessage;
         }
-        return OK;
+        loginMessage.setLoginMessage(OK);
+        return loginMessage;
     }
 }

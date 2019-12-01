@@ -4,6 +4,7 @@ import com.netcracer.edu.fapi.models.Place;
 import com.netcracer.edu.fapi.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,16 +21,19 @@ public class PlaceController {
         return placeService.findAll();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
     public Place savePlace(@RequestBody Place place){
         return placeService.save(place);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/{idPlace}", method = RequestMethod.DELETE)
     public void deletePlace(@PathVariable(name = "idPlace") Integer idPlace){
         placeService.delete(idPlace);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/update-place", method = RequestMethod.POST)
     public void updatePlaceIsFree(@RequestBody Integer idPlace){
         placeService.updatePlaceIsFree(idPlace);

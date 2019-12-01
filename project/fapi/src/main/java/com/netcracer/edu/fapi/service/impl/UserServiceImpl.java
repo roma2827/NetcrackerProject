@@ -3,19 +3,26 @@ package com.netcracer.edu.fapi.service.impl;
 import com.netcracer.edu.fapi.models.Ticket;
 import com.netcracer.edu.fapi.models.User;
 import com.netcracer.edu.fapi.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-@Service()
-public class UserServiceImpl implements UserService {
+@Service("customUserDetailsService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Value("${backend.server.url}")
     private String backendServerUrl;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<User> findAll() {
@@ -33,6 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForEntity(backendServerUrl + "/api/user", user, User.class).getBody();
     }
@@ -43,11 +51,10 @@ public class UserServiceImpl implements UserService {
         restTemplate.delete(backendServerUrl + "/api/user/" + idUser);
     }
 
-    //    ПЕРЕПИСАТЬ
     @Override
     public void updatePassword(Integer idUser, String password) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(backendServerUrl + "/api/user/" + idUser, password, User.class);
+        restTemplate.postForObject(backendServerUrl + "/api/user/update-password/" + idUser, password, Void.class);
     }
 
     @Override
@@ -70,4 +77,20 @@ public class UserServiceImpl implements UserService {
         RestTemplate restTemplate = new RestTemplate();
         return null;
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = findByLogin(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getLogin(), user.getPassword(), getAuthority(user));
+    }
+
+    private Set<SimpleGrantedAuthority> getAuthority(User user) {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+        return authorities;
+    }
+
 }

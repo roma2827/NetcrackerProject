@@ -5,8 +5,6 @@ export class Film {
   name: string;
   description: string;
   time: number;
-  startData: number;
-  endData: number;
   films: Set<Session>;
   imj: string;
 }

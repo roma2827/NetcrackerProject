@@ -8,9 +8,13 @@
         <li class="active">
           <a class="navbar-brand" routerLink="">Home</a>
           <a class="navbar-brand" routerLink="/films">All Films</a>
-          <a class="example_d" rel="nofollow noopener" (click)="_openSignInModal(SignIn)">
+          <a *ngIf="storageService.getCurrentUser() == null" class="example_d" rel="nofollow noopener" (click)="_openSignInModal(SignIn)">
               Sign In
           </a>
+          <a *ngIf="storageService.getCurrentUser()" class="navbar-brand" routerLink="/user-account/{{storageService.getCurrentUser().login}}">
+            {{storageService.getCurrentUser().login}}
+          </a>
+          <a *ngIf="storageService.getCurrentUser()" (click)="logout()" class="example_d" rel="nofollow noopener">Logout</a>
         </li>
       </ul>
     </div>
@@ -20,7 +24,7 @@
 
 <ng-template #SignIn>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Sign In</h4>
+    <h4 class="modal-title">Sign In</h4>
     <button type="button" class="close pull-right"
             aria-label="Close" (click)="_closeSignInModal()">
       <span aria-hidden="true">&times;</span>
@@ -28,41 +32,24 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-<!--      <div style="display: flex">-->
-<!--        <button [ngClass]="{'button_active':_currentNumber === 0}" (click)="_onChangeTab(0)">Tab 1</button>-->
-<!--        <button [ngClass]="{'button_active':_currentNumber === 1}" (click)="_onChangeTab(1)">Tab 2</button>-->
-<!--      </div>-->
-<!--      <div *ngIf="_currentNumber === 0">-->
-<!--        Tab content 1-->
-<!--      </div>-->
-<!--      <div *ngIf="_currentNumber === 1">-->
-<!--        Tab content 2-->
-<!--      </div>-->
-
-      <label>login</label>
-      <input class="form-control" name="login" [(ngModel)]="editableUs.login" #login="ngModel" required/>
-      <div [hidden]="login.valid || login.untouched" class="alert alert-danger">
-        Pls set login
-      </div>
+      <input placeholder="login" name="login" class="form-control" [(ngModel)]="loginModel.username"/>
     </div>
     <div class="form-group">
-      <label>password</label>
-      <input class="form-control" name="password" [(ngModel)]="editableUs.password" #password="ngModel" required/>
-      <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
-        Pls set password
-      </div>
+      <input placeholder="password" type="password" class="form-control" [(ngModel)]="loginModel.password"/>
     </div>
-    <div class="form-group">Text {{exceptionText}}</div>
+  </div>
+  <div class="text-center mb-3">
+    <a class="example_a" rel="nofollow noopener" (click)="_login()">
+      Sign In
+    </a>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="_login()"
-            [disabled]="login.invalid || password.invalid">Sing in
-    </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registrationModal"
-            (click)="_openRegistrationModal(Registration)">
-      Registration
-    </button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeSignInModal()">Close</button>
+    <div>
+      <div class="footer__text">
+        Not a member?
+        <a class="openRegistration" (click)="_openRegistrationModal(Registration)">Sign up</a>
+      </div>
+    </div>
   </div>
 </ng-template>
 
@@ -70,7 +57,7 @@
 <!--Registration-->
 <ng-template #Registration>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Registration</h4>
+    <h4 class="modal-title pull-left">Sign up</h4>
     <button type="button" class="close pull-right"
             aria-label="Close" (click)="_closeRegistrationModal()">
       <span aria-hidden="true">&times;</span>
@@ -78,24 +65,24 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <label>login</label>
-      <input class="form-control" name="login" [(ngModel)]="editableUs.login" #login="ngModel" required/>
-      <div [hidden]="login.valid || login.untouched" class="alert alert-danger">
-        Pls set login
-      </div>
+      <input class="form-control" placeholder="login" [(ngModel)]="editableUs.login"/>
     </div>
     <div class="form-group">
-      <label>password</label>
-      <input class="form-control" name="password" [(ngModel)]="editableUs.password" #password="ngModel" required/>
-      <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
-        Pls set password
-      </div>
+      <input class="form-control" placeholder="password" type="password" [(ngModel)]="editableUs.password"/>
+    </div>
+    <div class="form-group">
+      <input class="form-control" placeholder="repeat password" type="password" [(ngModel)]="repeatPassword"/>
+    </div>
+    <div class="text-center mb-3">
+      <a class="example_a" rel="nofollow noopener" (click)="_addUser()">
+        Sign Up
+      </a>
     </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="_addUser()"
-            [disabled]="login.invalid || password.invalid">Create
-    </button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeRegistrationModal()">Close</button>
-  </div>
+<!--  <div class="modal-footer">-->
+<!--    <button type="button" class="btn btn-default" (click)="_addUser()"-->
+<!--            [disabled]="login.invalid || password.invalid">Create-->
+<!--    </button>-->
+<!--    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeRegistrationModal()">Close</button>-->
+<!--  </div>-->
 </ng-template>
