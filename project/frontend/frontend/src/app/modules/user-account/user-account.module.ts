@@ -6,6 +6,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {TicketService} from "../../services/ticket.service";
 import {UserService} from "../../services/user.service";
 import {UserAccountComponent} from "./user-account.component";
+import {WalletService} from "../../services/wallet.service";
+import {StorageService} from "../../services/storage.service";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,7 @@ import {UserAccountComponent} from "./user-account.component";
     HttpClientModule,
   ],
 
-  providers: [UserService, TicketService],
+  providers: [UserService, TicketService, WalletService, StorageService],
   exports: [UserAccountComponent]
 })
 export class UserAccountModule {

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -49,31 +50,34 @@ public class SessionController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Session saveSession(@RequestBody Session session){
+    public Session saveSession(@RequestBody Session session) throws ParseException {
         Film film  = filmService.findByFilmId(session.getFilm().getFilmId());
         Hall hall = hallService.findByName(session.getHall().getName());
         session.setFilm(film);
         session.setHall(hall);
-        for(int i = 1; i < 51; i++) {
-            Place place = new Place();
-            place.setSession(session);
-            place.setIsFree("true");
-            place.setPrice(7d);
-            place.setSeat(i);
-            if (i < 11){
-                place.setRow(1);
-            } else if (i < 21){
-                place.setRow(2);
-            } else if (i < 31){
-                place.setRow(3);
-            } else if (i < 41){
-                place.setRow(4);
-            } else
-                place.setRow(5);
+        Session session1 = sessionService.save(session);
+        if (session1 != null) {
+            for(int i = 1; i < 51; i++) {
+                Place place = new Place();
+                place.setSession(session);
+                place.setIsFree("true");
+                place.setPrice(7d);
+                place.setSeat(i);
+                if (i < 11){
+                    place.setRow(1);
+                } else if (i < 21){
+                    place.setRow(2);
+                } else if (i < 31){
+                    place.setRow(3);
+                } else if (i < 41){
+                    place.setRow(4);
+                } else
+                    place.setRow(5);
 
-            placeService.save(place);
+                placeService.save(place);
+            }
         }
-        return sessionService.save(session);
+        return session1;
 
 //        Session newSession = sessionService.save(session);
 //        Place place = new Place();

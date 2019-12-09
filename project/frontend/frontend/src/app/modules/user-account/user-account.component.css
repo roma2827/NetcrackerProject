@@ -1,0 +1,108 @@
+.user {
+  margin-top: 100px;
+  margin-left: 130px;
+  margin-right: 130px;
+}
+
+.panel-body {
+  display: flex;
+}
+
+.user__screen {
+  width: 50%;
+}
+
+.rounded-circle {
+  width: 450px;
+  height: 450px;
+}
+
+.user__panel {
+  width: 50%;
+}
+
+.user__panel__login {
+  width: 70%;
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.user__panel__header {
+  display: flex;
+}
+
+.user__wallet {
+  display: flex;
+}
+
+.wallet__imj {
+  width: 30%;
+}
+
+.your__money {
+  width: 40%;
+  text-align: left;
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.replenishment__of__fund {
+  width: 30%;
+}
+
+.user__tickets__header {
+  display: flex;
+}
+
+.ticket__src {
+  width: 15%;
+  margin-left: 14px;
+}
+
+.header__text {
+  text-align: left;
+  font-size: 30px;
+  font-weight: 700;
+  padding-left: 0px;
+}
+
+.user__tickets__body {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ticket {
+  width: 40%;
+  margin: 10px;
+  margin-top: 20px;
+}
+
+.select__ticket {
+  color: #494949;
+  text-decoration: none;
+  background: none;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid grey;
+  display: inline-block;
+  transition: all 0.4s ease 0s;
+}
+
+.select__ticket:hover {
+  cursor: pointer;
+  border-color: black;
+  color: black;
+  transition: all 0.4s ease 0s;
+}
+
+.ticket__film__name {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.ticket__place {
+  display: flex;
+  font-size: 17px;
+  font-weight: 500;
+}

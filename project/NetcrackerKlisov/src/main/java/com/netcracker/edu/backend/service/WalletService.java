@@ -8,4 +8,5 @@ public interface WalletService {
     List<Wallet> findAll();
     Wallet save(Wallet wallet);
     //void dalete(Integer idWallet);
+    void replenishmentOfFunds(Integer idWallet, Double money);
 }

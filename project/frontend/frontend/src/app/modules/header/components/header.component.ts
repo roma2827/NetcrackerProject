@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.userService.getAuthorizedUser()
             .subscribe((user: User) => {
               this.storageService.setCurrentUser(user);
+              this._closeSignInModal();
             });
         }
       }, (error) => {
@@ -64,7 +65,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         //   alert(error.message);
         // }
       });
-    this._closeSignInModal();
   }
 
   public logout(): void {

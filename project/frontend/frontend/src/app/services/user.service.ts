@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { User } from "../modules/models/user";
 import {Ticket} from "../modules/models/ticket";
-import {LoginMessage} from "../modules/models/login";
 import {LoginModel} from "../modules/models/login.model";
 
 
@@ -45,10 +44,6 @@ export class UserService {
 
   getTicketByLogin(login: string): Observable<Ticket[]> {
     return this.http.get<Ticket[]>("/api/user/ticketByLogin/" + login);
-  }
-
-  login(user: User): Observable<LoginMessage> {
-    return this.http.post<LoginMessage>("/api/user/login", user);
   }
 
   public generateToken(login: LoginModel): Observable<AuthToken> {

@@ -5,8 +5,8 @@ import java.util.Set;
 public class Session {
 
     private Integer idSession;
-    private Integer date;
-    private Double time;
+    private String date;
+    private String time;
     private Film film;
     private Hall hall;
     private Set<Place> sessionsPlace;
@@ -15,7 +15,7 @@ public class Session {
     public Session() {
     }
 
-    public Session(Integer idSession, Integer date, Double time, Film film, Hall hall, Set<Place> sessionsPlace, Set<Ticket> tickets) {
+    public Session(Integer idSession, String date, String time, Film film, Hall hall, Set<Place> sessionsPlace, Set<Ticket> tickets) {
         this.idSession = idSession;
         this.date = date;
         this.time = time;
@@ -57,19 +57,19 @@ public class Session {
         this.idSession = idSession;
     }
 
-    public Integer getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Integer date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Double getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Double time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

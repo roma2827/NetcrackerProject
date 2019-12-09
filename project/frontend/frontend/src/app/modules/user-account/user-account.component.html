@@ -1,28 +1,31 @@
-<h1>Welcome {{user.login}} money {{user.wallet.money}}</h1>
-<h1>Password {{user.password}}</h1>
+<!--<h1>Welcome {{user.login}} money {{user.wallet.money}}</h1>-->
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal"
-        (click)="_openChangePasswordModal(passwordTemplate, user)">
-  Change password
-</button>
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal"-->
+<!--        (click)="_openChangePasswordModal(passwordTemplate, user)">-->
+<!--  Change password-->
+<!--</button>-->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MoneyModal"-->
+<!--        (click)="_openMoneyModal(moneyTemplate, user)">-->
+<!--  Replenishment Of Fund-->
+<!--</button>-->
 
 
-<h1>Your ticket</h1>
-<div class="row">
-  <div class="" *ngFor="let ticket of tickets">
-    <div>
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticketInfoModal"
-              (click)="_openTicketInfoModal(ticketInfoTemplate, ticket)">
-        <div><span>Date: </span>{{ticket.session.date}}</div>
-        <div><span>Time: </span>{{ticket.session.time}}</div>
-        <div><span>hall: </span>{{ticket.session.hall.name}}</div>
-        <div><span>cinema: </span>{{ticket.session.hall.cinema.name}}</div>
-        <div><span>address: </span>{{ticket.session.hall.cinema.address}}</div>
-<!--        <button type="button" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>-->
-      </button>
-    </div>
-  </div>
-</div>
+<!--<h1>Your tickets</h1>-->
+<!--<div class="row">-->
+<!--  <div class="" *ngFor="let ticket of tickets">-->
+<!--    <div>-->
+<!--      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ticketInfoModal"-->
+<!--              (click)="_openTicketInfoModal(ticketInfoTemplate, ticket)">-->
+<!--        <div><span>Date: </span>{{ticket.session.date}}</div>-->
+<!--        <div><span>Time: </span>{{ticket.session.time}}</div>-->
+<!--        <div><span>hall: </span>{{ticket.session.hall.name}}</div>-->
+<!--        <div><span>cinema: </span>{{ticket.session.hall.cinema.name}}</div>-->
+<!--        <div><span>address: </span>{{ticket.session.hall.cinema.address}}</div>-->
+<!--&lt;!&ndash;        <button type="button" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>&ndash;&gt;-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <ng-template #passwordTemplate>
   <div class="modal-header">
@@ -50,6 +53,32 @@
 <!--            [disabled]="password.invalid "-->
     </button>
     <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeChangePasswordModal()">Close</button>
+  </div>
+</ng-template>
+
+<ng-template #moneyTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Replenishment Of Fund</h4>
+    <button type="button" class="close pull-right"
+            aria-label="Close" (click)="_closeMoneyModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Replenishment Of Fund</label>
+      <input class="form-control" [(ngModel)]="money" required/>
+      <!--      <div class="alert alert-danger">-->
+      <!--&lt;!&ndash;        [hidden]="password.valid || password.untouched" &ndash;&gt;-->
+      <!--        Pls set new password-->
+      <!--      </div>-->
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="_replenishmentOfFund(money)">Add
+      <!--            [disabled]="password.invalid "-->
+    </button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeMoneyModal()">Close</button>
   </div>
 </ng-template>
 
@@ -91,3 +120,70 @@
   </div>
 </ng-template>
 
+
+
+
+<div class="container" class="user">
+  <div class="user__profile">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="user__screen">
+          <img class="rounded-circle" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg">
+        </div>
+        <div class="user__panel" >
+          <div class="user__panel__header">
+            <div class="container user__panel__login">
+              {{storageService.getCurrentUser().login}}
+            </div>
+            <div class="user__change__password">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changePasswordModal"
+                      (click)="_openChangePasswordModal(passwordTemplate, user)">
+                Change password
+              </button>
+            </div>
+          </div>
+          <hr>
+          <div class="container user__wallet">
+            <div class="wallet__imj">
+              <img src="./src/assets/imj/wallet.svg" height="50">
+            </div>
+            <div class="your__money">
+              {{user.wallet.money}} BYN
+            </div>
+            <div class="replenishment__of__fund">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MoneyModal"
+                      (click)="_openMoneyModal(moneyTemplate, user)">
+                Replenishment Of Fund
+              </button>
+            </div>
+          </div>
+          <hr>
+          <div class="user__tickets">
+            <div class="user__tickets__header">
+              <div class="ticket__src">
+                <img src="./src/assets/imj/movies.svg" height="50">
+              </div>
+              <div class="header__text">
+                Your tickets
+              </div>
+            </div>
+            <div class="user__tickets__body">
+              <div class="ticket" *ngFor="let ticket of tickets">
+                <a class="select__ticket" (click)="_openTicketInfoModal(ticketInfoTemplate, ticket)">
+                  <div class="ticket__film__name">
+                    {{ticket.session.film.name}}
+                  </div>
+                  <div class="ticket__place">
+                    Row {{ticket.place.row}} Seat {{ticket.place.seat}}
+                  </div>
+                  {{ticket.session.time}}
+                  {{ticket.session.date}}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

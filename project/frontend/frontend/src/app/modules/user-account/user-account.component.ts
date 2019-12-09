@@ -6,23 +6,30 @@ import {Subscription} from "rxjs";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Ticket} from "../models/ticket";
 import {TicketService} from "../../services/ticket.service";
+import {WalletService} from "../../services/wallet.service";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: 'app-user-account',
   templateUrl: './user-account.component.html',
+  styleUrls: ["./user-account.component.css"]
 })
 export class UserAccountComponent implements OnInit, OnDestroy {
 
   public tickets: Ticket[];
   public ticket: Ticket;
   public editableT: Ticket = new Ticket();
+  public money: string;
   public password: String;
   public editableU: User = new User();
+  public modalMoneyRef: BsModalRef;
   public modalRef: BsModalRef;
   public user: User;
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private storageService: StorageService,
+    private walletService: WalletService,
     private ticketService: TicketService,
     private modalService: BsModalService,
     private userService: UserService,
@@ -80,6 +87,31 @@ export class UserAccountComponent implements OnInit, OnDestroy {
 
   private loadUserAccount(): void {
     this.ngOnInit();
+  }
+
+
+  // Money
+  public _closeMoneyModal(): void {
+    this.modalMoneyRef.hide();
+  }
+
+  public _openMoneyModal(moneyTemplate: TemplateRef<any>, user: User): void {
+    if (user) {
+      this.editableU = user;
+    }
+    this.modalMoneyRef = this.modalService.show(moneyTemplate);
+  }
+
+  public _replenishmentOfFund(money): void {
+    this.subscriptions.push(this.walletService.replenishmentOfFund(this.user.wallet.idWallet, money).subscribe(() => {
+      this._closeMoneyModal();
+      this._updateUserAccount();
+      this.refreshMoney();
+    }));
+  }
+
+  private refreshMoney(): void {
+    this.money = null;
   }
 
 

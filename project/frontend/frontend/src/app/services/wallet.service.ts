@@ -6,13 +6,11 @@ import { Wallet } from "../modules/models/wallet";
 
 
 @Injectable()
-// Data service
-export class WalletService { //todo create interface
+export class WalletService {
 
   constructor(private http: HttpClient) {
   }
 
-  // Ajax request for billing account data
   getWallets(): Observable<Wallet[]> {
     return this.http.get<Wallet[]>('/api/wallet')
   }
@@ -21,8 +19,12 @@ export class WalletService { //todo create interface
     return this.http.post<Wallet>('/api/wallet', wallet);
   }
 
+  replenishmentOfFund(idWallet: number, money: string): Observable<void> {
+    return this.http.post<void>('/api/wallet/rep/' + idWallet, money);
+  }
+
   // deleteWallet(idWallet: number): Observable<void> {
   //   return this.http.delete<void>('/api/wallet/' + idWallet);
   // }
-  
+
 }

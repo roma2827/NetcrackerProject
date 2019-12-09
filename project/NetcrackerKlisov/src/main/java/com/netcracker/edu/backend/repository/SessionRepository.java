@@ -27,4 +27,7 @@ public interface SessionRepository extends CrudRepository<Session, Integer> {
 
     @Query("select s.film from Session s where s.idSession = :idSession")
     Film findFilmByIdSession(@Param("idSession") Integer idSession);
+
+    @Query("select s from Session s where s.hall.idHall = :idHall and s.date = :date")
+    List<Session> findHalls(@Param("idHall") Integer idHall, @Param("date") String date);
 }

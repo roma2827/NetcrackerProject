@@ -3,16 +3,15 @@ import {Hall} from "../models/hall";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
 import {SessionService} from "../../services/session.service";
-import {HallService} from "../../services/hall.service";
 import {Place} from "../models/place";
 import {PlaceService} from "../../services/place.service";
-import {User} from "../models/user";
 import {Film} from "../film/models/film";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Ticket} from "../models/ticket";
 import {TicketService} from "../../services/ticket.service";
 import {Session} from "../models/session";
 import {StorageService} from "../../services/storage.service";
+import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 @Component({
   selector: "app-hall",
@@ -20,8 +19,6 @@ import {StorageService} from "../../services/storage.service";
   styleUrls: ["./hall.component.css"]
 })
 export class HallComponent implements OnInit, OnDestroy {
-
-  public editTicketMode = false;
 
   public editableT: Ticket = new Ticket();
   public modalTicketRef: BsModalRef;
@@ -33,6 +30,7 @@ export class HallComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private loadingService: Ng4LoadingSpinnerService,
     private storageService: StorageService,
     private ticketService: TicketService,
     private modalService: BsModalService,
@@ -88,15 +86,6 @@ export class HallComponent implements OnInit, OnDestroy {
 
   // Ticket
   public _openTicketModal(template: TemplateRef<any>): void {
-
-    // if (ticket) {
-    //   this.editTicketMode = true;
-    //   this.editableT = ticket;
-    // } else {
-    //   this.refreshT();
-    //   this.editTicketMode = false;
-    // }
-
     this.modalTicketRef = this.modalService.show(template);
   }
 
@@ -105,6 +94,7 @@ export class HallComponent implements OnInit, OnDestroy {
   }
 
   public _addTicket(session: Session, place: Place): void {
+    this.loadingService.show();
     this.session.film = this.film;
     this.editableT.user = this.storageService.getCurrentUser();
     this.editableT.place = place;
@@ -112,6 +102,7 @@ export class HallComponent implements OnInit, OnDestroy {
       this.subscriptions.push(this.ticketService.saveTicket(this.editableT).subscribe(() => {
       this._updateHall();
       this.refreshT();
+        this.loadingService.hide();
       this._closeTicketModal();
     }));
   }

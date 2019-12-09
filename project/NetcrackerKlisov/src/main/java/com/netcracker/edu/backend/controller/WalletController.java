@@ -28,4 +28,9 @@ public class WalletController {
     public void deleteWallet(@PathVariable(name = "idWallet") Integer idWallet){
         walletService.delete(idWallet);
     }*/
+
+    @RequestMapping(value = "/rep/{idWallet}", method = RequestMethod.POST)
+    public void replenishmentOfFund(@PathVariable(name = "idWallet") Integer idWallet, @RequestBody Double money) {
+        walletService.replenishmentOfFunds(idWallet, money);
+    }
 }

@@ -29,4 +29,9 @@ public class WalletServiceImpl implements WalletService {
     public void delete(Integer idWallet){
         walletRepository.deleteById(idWallet);
     }*/
+
+    @Override
+    public void replenishmentOfFunds(Integer idWallet, Double money) {
+        walletRepository.replenishmentOfFunds(idWallet, money);
+    }
 }

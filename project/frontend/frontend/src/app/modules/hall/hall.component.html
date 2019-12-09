@@ -1,3 +1,4 @@
+<ng4-loading-spinner></ng4-loading-spinner>
 <div class="container hall">
   <div class="container text__hall">
     Please pick place
@@ -132,7 +133,7 @@
 <!--Ticket-->
 <ng-template #Ticket>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Your Ticket</h4>
+    <h4 class="modal-title pull-left">Ticket</h4>
     <button type="button" class="close pull-right"
             aria-label="Close" (click)="_closeTicketModal()">
       <span aria-hidden="true">&times;</span>
@@ -140,26 +141,66 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <h5>Session time {{session.time}}</h5>
+      <div class="ticket__info__film">
+        {{session.film.name}}
+      </div>
     </div>
     <div class="form-group">
-      <h5>Session date {{session.date}}</h5>
+      <div class="time__imj">
+        <img src="src/assets/imj/clock-circular-outline.svg" height="25">
+      </div>
+      <div class="ticket__info">
+        {{session.time}}
+      </div>
     </div>
     <div class="form-group">
-      <h5>Address {{hall.cinema.address}}</h5>
+      <div class="date__imj">
+        <img src="src/assets/imj/calendar.svg" height="25">
+      </div>
+      <div class="ticket__info">
+        {{session.date}}
+      </div>
     </div>
     <div class="form-group">
-      <h5>Your place seat {{place.seat}} row {{place.row}}</h5>
+      <div class="adress__imj">
+        <img src="src/assets/imj/map.svg" height="25">
+      </div>
+      <div class="ticket__info">
+        {{hall.cinema.address}} {{hall.name}}
+      </div>
     </div>
     <div class="form-group">
-      <h5>Price {{place.price}} p</h5>
+      <div class="ticket__info">
+        Your place:  seat {{place.seat}} row {{place.row}}
+      </div>
+<!--      <div class="place__seat">-->
+<!--        seat {{place.seat}}-->
+<!--      </div>-->
+<!--      <div class="place__row">-->
+<!--        row {{place.row}}-->
+<!--      </div>-->
+    </div>
+    <div class="form-group">
+      <div class="price__imj">
+        <img src="src/assets/imj/price-tag.svg" height="40">
+      </div>
+      <div class="price">
+        {{place.price}} BYN
+      </div>
+      <div class="buy__ticket__button" *ngIf="storageService.getCurrentUser()">
+        <button *ngIf="storageService.getCurrentUser().role === 'USER'" class="button_buy_ticket"
+                data-toggle="modal" data-target="#addFilmModal"
+                (click)="_addTicket(session, place)">
+          Buy Ticket
+        </button>
+      </div>
     </div>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-default"  (click)="_addTicket(session, place)" >Buy
-<!--      (click)="updateIsFree(place.idPlace)"-->
-<!--            [disabled]="place.invalid || session.invalid">{{editTicketMode ? "Save": "Create"}}-->
-    </button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeTicketModal()">Close</button>
-  </div>
+<!--  <div class="modal-footer">-->
+<!--    <button type="button" class="btn btn-default"  (click)="_addTicket(session, place)" >Buy-->
+<!--&lt;!&ndash;      (click)="updateIsFree(place.idPlace)"&ndash;&gt;-->
+<!--&lt;!&ndash;            [disabled]="place.invalid || session.invalid">{{editTicketMode ? "Save": "Create"}}&ndash;&gt;-->
+<!--    </button>-->
+<!--    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeTicketModal()">Close</button>-->
+<!--  </div>-->
 </ng-template>

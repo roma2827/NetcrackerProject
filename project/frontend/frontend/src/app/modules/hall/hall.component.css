@@ -109,3 +109,87 @@
 .place__item_free:hover {
   cursor: pointer;
 }
+
+
+.modal-title {
+  padding-left: 186px;
+  color: #454449;
+  font-weight: 900;
+  font-size: 30px;
+}
+
+.modal-header {
+  background-color: goldenrod;
+}
+
+.form-control {
+  display: block;
+  width: 79%;
+  height: calc(1.5em + .75rem + 2px);
+  /*padding: 1.375rem .75rem;*/
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 3px solid grey;
+  border-radius: 2.25rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  margin-left: 52px;
+}
+
+.form-group {
+  display: flex;
+  margin-left: 30px;
+}
+
+.ticket__info__film {
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.ticket__info {
+  font-weight: 600;
+  font-size: 20px;
+  margin-left: 18px;
+  text-align: left;
+}
+
+.price__imj {
+  width: 20%;
+  text-align: center;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 30px;
+}
+
+.buy__ticket__button {
+  text-align: center;
+  width: 56%;
+}
+
+.button_buy_ticket {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button_buy_ticket:hover {background-color: #3e8e41}
+
+.button_buy_ticket:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}

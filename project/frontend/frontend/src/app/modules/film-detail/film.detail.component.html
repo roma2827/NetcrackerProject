@@ -1,3 +1,4 @@
+<ng4-loading-spinner></ng4-loading-spinner>
 <div class="container film__detail__main">
   <div class="container film__detail">
     <div class="film__imj">
@@ -17,13 +18,16 @@
         </div>
         <div class="container session__info">
             <a class="select__session" routerLink="/hall/{{session.idSession}}" rel="nofollow noopener">
-              <h1>{{session.time}}:00</h1>
+              <h1>{{session.time}}</h1>
               {{session.hall.name}}
             </a>
         </div>
-        <div *ngIf="storageService.getCurrentUser()">
+        <div class="delete__session" *ngIf="storageService.getCurrentUser()">
           <div *ngIf="storageService.getCurrentUser().role === 'ADMIN'">
-            <button type="buttsn" class="btn btn-danger" (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">Delete Session</button>
+            <a class="delete-session-button" rel="nofollow noopener"
+               (click)="_deleteSession(session.idSession)" routerLink="/detail/{{film.filmId}}">
+              Delete Session
+            </a>
           </div>
         </div>
       </div>
@@ -81,7 +85,7 @@
 <!--ADD SESSION-->
 <ng-template #sessionTemplate>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">{{editSessionMode ? "Edit": "Create"}} Session</h4>
+      <h4 class="modal-title pull-left">Create Session</h4>
       <button type="button" class="close pull-right"
               aria-label="Close" (click)="_closeSessionModal()">
         <span aria-hidden="true">&times;</span>
@@ -90,17 +94,13 @@
     <div class="modal-body">
       <div class="form-group">
         <label>date</label>
-        <input class="form-control" name="date" [(ngModel)]="editableS.date" #date="ngModel" required/>
-        <div [hidden]="date.valid || date.untouched" class="alert alert-danger">
-          Pls set date
-        </div>
+<!--        <input class="form-control" [(ngModel)]="editableS.date"/>-->
+        <input type="date" class="form-control" id="date" name="date" [(ngModel)]="editableS.date" placeholder="Дата" required>
       </div>
       <div class="form-group">
         <label>time</label>
-        <input class="form-control" name="time" [(ngModel)]="editableS.time" #time="ngModel" required/>
-        <div [hidden]="time.valid || time.untouched" class="alert alert-danger">
-          Pls set time
-        </div>
+<!--        <input class="form-control" [(ngModel)]="editableS.time" />-->
+        <input type="time" class="form-control" id="time" name="time" [(ngModel)]="editableS.time" placeholder="Время" required>
       </div>
       <div class="form-group">
         <label>Halls</label>
@@ -112,10 +112,15 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-default" (click)="_addSession(film)"
-              [disabled]="time.invalid || date.invalid">{{editSessionMode ? "Save": "Create"}}
-      </button>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeSessionModal()">Close</button>
+<!--      <button type="button" class="btn btn-default" (click)="_addSession(film)"-->
+<!--              [disabled]="time.invalid || date.invalid">{{editSessionMode ? "Save": "Create"}}-->
+<!--      </button>-->
+<!--      <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeSessionModal()">Close</button>-->
+      <div class="text-center mb-3">
+        <a class="example_a" rel="nofollow noopener" (click)="_addSession(film)">
+          Add Session
+        </a>
+      </div>
     </div>
 </ng-template>
 
@@ -123,7 +128,7 @@
 <!--ADD CINEMA-->
 <ng-template #cinemaTemplate>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Create Cinema</h4>
+    <h4 class="modal-title pull-left">Add Cinema</h4>
     <button type="button" class="close pull-right"
             aria-label="Close" (click)="_closeCinemaModal()">
       <span aria-hidden="true">&times;</span>
@@ -132,24 +137,23 @@
   <div class="modal-body">
     <div class="form-group">
       <label>name</label>
-      <input class="form-control" name="name" [(ngModel)]="editableC.name" #name="ngModel" required/>
-      <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
-        Pls set name
-      </div>
+      <input class="form-control" [(ngModel)]="editableC.name" required/>
     </div>
     <div class="form-group">
       <label>address</label>
-      <input class="form-control" name="time" [(ngModel)]="editableC.address" #address="ngModel" required/>
-      <div [hidden]="address.valid || address.untouched" class="alert alert-danger">
-        Pls set address
-      </div>
+      <input class="form-control" [(ngModel)]="editableC.address" required/>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="_addCinema()"
-            [disabled]="name.invalid || address.invalid">{{editSessionMode ? "Save": "Create"}}
-    </button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeCinemaModal()">Close</button>
+<!--    <button type="button" class="btn btn-default" (click)="_addCinema()"-->
+<!--            [disabled]="name.invalid || address.invalid">{{editSessionMode ? "Save": "Create"}}-->
+<!--    </button>-->
+<!--    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeCinemaModal()">Close</button>-->
+    <div class="text-center mb-3">
+      <a class="example_a" rel="nofollow noopener" (click)="_addCinema()">
+        Add Cinema
+      </a>
+    </div>
   </div>
 </ng-template>
 
@@ -157,7 +161,7 @@
 
 
 
-<!--ADD SESSION-->
+<!--ADD HALL-->
 <ng-template #hallTemplate>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Create Hall</h4>
@@ -169,28 +173,22 @@
   <div class="modal-body">
     <div class="form-group">
       <label>name</label>
-      <input class="form-control" name="name" [(ngModel)]="editableH.name" #name="ngModel" required/>
-      <div [hidden]="name.valid || name.untouched" class="alert alert-danger">
-        Pls set name
-      </div>
+      <input class="form-control" [(ngModel)]="editableH.name" required/>
     </div>
     <div class="form-group">
       <label>№ Seat</label>
-      <input class="form-control" name="nSeat" [(ngModel)]="editableH.nSeat" #nSeat="ngModel" required/>
-      <div [hidden]="nSeat.valid || nSeat.untouched" class="alert alert-danger">
-        Pls set nSeat
-      </div>
+      <input class="form-control" [(ngModel)]="editableH.nSeat" required/>
+<!--      <div [hidden]="nSeat.valid || nSeat.untouched" class="alert alert-danger">-->
+<!--        Pls set nSeat-->
+<!--      </div>-->
     </div>
     <div class="form-group">
       <label>№ Row</label>
-      <input class="form-control" name="nRow" [(ngModel)]="editableH.nRow" #nRow="ngModel" required/>
-      <div [hidden]="nRow.valid || nRow.untouched" class="alert alert-danger">
-        Pls set nRow
-      </div>
+      <input class="form-control" [(ngModel)]="editableH.nRow" required/>
     </div>
     <div class="form-group">
       <label>Cinema</label>
-      <select class="form-control" name="cinema" [(ngModel)]="editableH.cinema">
+      <select class="form-control" [(ngModel)]="editableH.cinema">
         <option  *ngFor="let cinema of cinemas" [ngValue]="cinema">
           {{cinema.name}}
         </option>
@@ -198,10 +196,15 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="_addHall()"
-            [disabled]="name.invalid || nSeat.invalid || nRow.invalid">Create
-    </button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeHallModal()">Close</button>
+<!--    <button type="button" class="btn btn-default" (click)="_addHall()"-->
+<!--            [disabled]="name.invalid || nSeat.invalid || nRow.invalid">Create-->
+<!--    </button>-->
+<!--    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="_closeHallModal()">Close</button>-->
+    <div class="text-center mb-3">
+      <a class="example_a" rel="nofollow noopener" (click)="_addHall()">
+        Create Hall
+      </a>
+    </div>
   </div>
 </ng-template>
 

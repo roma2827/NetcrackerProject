@@ -2,6 +2,18 @@
   <div class="poster__title">
     Movie poster
   </div>
+  <div class="admins__panel" *ngIf="storageService.getCurrentUser()">
+    <div class="admin__button__panel" *ngIf="storageService.getCurrentUser().role === 'ADMIN'">
+<!--      <a class="admin-button" rel="nofollow noopener" data-toggle="modal" data-target="#addFilmModal"-->
+<!--         (click)="_openModal(template)">-->
+<!--        Add Film-->
+<!--      </a>-->
+      <button class="button_add_film" data-toggle="modal" data-target="#addFilmModal"
+              (click)="_openModal(template)">
+        Add Film
+      </button>
+    </div>
+    </div>
 </div>
 
 <div class="all__films">
@@ -21,22 +33,22 @@
   </div>
 </div>
 
-<div class="container admin" *ngIf="storageService.getCurrentUser()">
-  <div *ngIf="storageService.getCurrentUser().role == 'ADMIN'">
-    <div class="admin__panel__header">
-      admin panel
-    </div>
-    <hr align="center" width="90%" size="50" color="black"/>
-    <div class="admin__panel__body">
-      <div class="admin__button__panel">
-        <a class="admin-button" rel="nofollow noopener" data-toggle="modal" data-target="#addFilmModal"
-           (click)="_openModal(template)">
-          Add Film
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<div class="container admin" *ngIf="storageService.getCurrentUser()">-->
+<!--  <div *ngIf="storageService.getCurrentUser().role == 'ADMIN'">-->
+<!--    <div class="admin__panel__header">-->
+<!--      admin panel-->
+<!--    </div>-->
+<!--    <hr align="center" width="90%" size="50" color="black"/>-->
+<!--    <div class="admin__panel__body">-->
+<!--      <div class="admin__button__panel">-->
+<!--        <a class="admin-button" rel="nofollow noopener" data-toggle="modal" data-target="#addFilmModal"-->
+<!--           (click)="_openModal(template)">-->
+<!--          Add Film-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 
 

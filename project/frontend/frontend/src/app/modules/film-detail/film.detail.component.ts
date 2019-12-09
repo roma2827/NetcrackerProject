@@ -11,6 +11,7 @@ import {HallService} from "../../services/hall.service";
 import {CinemaService} from "../../services/cinema.service";
 import {Cinema} from "../models/cinema";
 import {StorageService} from "../../services/storage.service";
+import {Ng4LoadingSpinnerService} from "ng4-loading-spinner";
 
 
 @Component({
@@ -34,6 +35,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
+    private loadingService: Ng4LoadingSpinnerService,
     private storageService: StorageService,
     private cinemaService: CinemaService,
     private hallService: HallService,
@@ -78,6 +80,7 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public _deleteSession(idSession: number): void {
+    alert("Exception");
     this.subscriptions.push(this.sessionService.deleteSession(idSession).subscribe(() => {
       this.ngOnInit();
     }));
@@ -97,10 +100,12 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public _addSession(film: Film): void {
+    this.loadingService.show();
     this.editableS.film = film;
     this.subscriptions.push(this.sessionService.saveSession(this.editableS).subscribe(() => {
       this._updateFilmDetail();
       this.refreshS();
+      this.loadingService.hide();
       this._closeSessionModal();
     }));
   }
@@ -127,9 +132,11 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public _addCinema(): void {
+    this.loadingService.show();
     this.subscriptions.push(this.cinemaService.saveCinema(this.editableC).subscribe(() => {
       this._updateFilmDetail();
       this.refreshC();
+      this.loadingService.hide();
       this._closeCinemaModal();
     }));
   }
@@ -148,9 +155,11 @@ export class FilmDetailComponent implements OnInit, OnDestroy {
   }
 
   public _addHall(): void {
+    this.loadingService.show();
     this.subscriptions.push(this.hallService.saveHall(this.editableH).subscribe(() => {
       this._updateFilmDetail();
       this.refreshH();
+      this.loadingService.hide();
       this._closeHallModal();
     }));
   }

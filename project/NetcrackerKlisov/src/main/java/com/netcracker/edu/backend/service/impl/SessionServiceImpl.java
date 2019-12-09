@@ -4,15 +4,20 @@ import com.netcracker.edu.backend.entity.Film;
 import com.netcracker.edu.backend.entity.Hall;
 import com.netcracker.edu.backend.entity.Place;
 import com.netcracker.edu.backend.entity.Session;
+import com.netcracker.edu.backend.repository.HallRepository;
 import com.netcracker.edu.backend.repository.PlaceRepository;
 import com.netcracker.edu.backend.repository.SessionRepository;
 import com.netcracker.edu.backend.repository.TicketRepository;
 import com.netcracker.edu.backend.service.SessionService;
 import com.netcracker.edu.backend.service.TicketService;
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -25,7 +30,7 @@ public class SessionServiceImpl implements SessionService {
     private TicketService ticketService;
 
     @Autowired
-    private PlaceRepository placeRepository;
+    private HallRepository hallRepository;
 
     @Override
     public List<Session> findAll(){
@@ -43,7 +48,27 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public Session save(Session session){
+    public Session save(Session session) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        Date currentSessionTime = dateFormat.parse(session.getTime());
+        Date endCurrentSessionTime = DateUtils.addMinutes(currentSessionTime, session.getFilm().getTime().intValue() + 15);
+        List<Session> sessions = sessionRepository.findHalls(session.getHall().getIdHall(), session.getDate());
+        if (!sessions.isEmpty()) {
+                for (Session sess: sessions) {
+                    try {
+                        Date sessionTime = dateFormat.parse(sess.getTime());
+                        Date targetTime = DateUtils.addMinutes(sessionTime, sess.getFilm().getTime().intValue() + 15);
+                        if (endCurrentSessionTime.compareTo(sessionTime) < 0) {
+                            return sessionRepository.save(session);
+                        } else if (currentSessionTime.compareTo(targetTime) > 0) {
+                            return sessionRepository.save(session);
+                        }
+                    } catch (ParseException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                return null;
+        }
         return sessionRepository.save(session);
     }
 

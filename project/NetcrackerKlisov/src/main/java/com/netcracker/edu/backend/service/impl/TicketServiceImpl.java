@@ -44,14 +44,17 @@ public class TicketServiceImpl implements TicketService {
         Place place = placeService.findByIdPlace(ticket.getPlace().getIdPlace());
         Session session = sessionService.findByIdSession(ticket.getSession().getIdSession());
         User user = userService.findByIdUser(ticket.getUser().getIdUser());
-        placeService.updatePlaceIsFree(place.getIdPlace());
         Wallet wallet = walletRepository.findById(user.getWallet().getIdWallet()).get();
-        wallet.setMoney(wallet.getMoney() - ticket.getPlace().getPrice());
-        walletRepository.save(wallet);
-        ticket.setUser(user);
-        ticket.setSession(session);
-        ticket.setPlace(place);
-        return ticketRepository.save(ticket);
+        if (wallet.getMoney() >= place.getPrice()) {
+            wallet.setMoney(wallet.getMoney() - ticket.getPlace().getPrice());
+            walletRepository.save(wallet);
+            ticket.setUser(user);
+            ticket.setSession(session);
+            ticket.setPlace(place);
+            placeService.updatePlaceIsFree(place.getIdPlace());
+            return ticketRepository.save(ticket);
+        }
+        return null;
     }
 
     @Override

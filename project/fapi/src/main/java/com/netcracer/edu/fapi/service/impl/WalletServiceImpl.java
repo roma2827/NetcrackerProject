@@ -28,4 +28,10 @@ public class WalletServiceImpl implements WalletService {
         RestTemplate restTemplate = new RestTemplate();
         return restTemplate.postForEntity(backendServerUrl + "/api/wallet", wallet, Wallet.class).getBody();
     }
+
+    @Override
+    public void replenishmentOfFunds(Integer idWallet, Double money) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.postForObject(backendServerUrl + "/api/wallet/rep/" + idWallet, money, Void.class);
+    }
 }

@@ -18,11 +18,11 @@ public class Session {
 
     @Column
     @NotNull
-    private Integer date;
+    private String date;
 
     @Column
     @NotNull
-    private Double time;
+    private String time;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "id_film")
@@ -46,7 +46,7 @@ public class Session {
     public Session() {
     }
 
-    public Session(@NotNull Integer date, @NotNull Double time, Film film, Hall hall, Set<Place> sessionsPlace, Set<Ticket> tickets) {
+    public Session(@NotNull String date, @NotNull String time, Film film, Hall hall, Set<Place> sessionsPlace, Set<Ticket> tickets) {
         this.date = date;
         this.time = time;
         this.film = film;
@@ -79,19 +79,19 @@ public class Session {
         this.idSession = idSession;
     }
 
-    public Integer getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Integer date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Double getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Double time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
